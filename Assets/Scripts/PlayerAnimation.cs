@@ -17,17 +17,14 @@ public class PlayerAnimation : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (playerController.Direction.sqrMagnitude > 0)
         {
-            //print("walking");
             anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_WALKING);
         }
         else
         {
-            //print("idle");
             anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_IDLE);
         }
 

@@ -25,17 +25,11 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-
-        //rig.velocity = direction * speed;
         OnMove();
     }
 
-    /*void Update()
-    {
-        rig.velocity = movementInput * speed;
-    }*/
 
-    #region
+    #region Movement
 
     void OnMove()
     {
@@ -56,6 +50,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnMovement(InputAction.CallbackContext value)
     {
+        /*if (value.canceled)
+        {
+            direction = Vector2.zero;
+        }
+        else
+        {
+            direction = value.ReadValue<Vector2>();
+        }*/
         direction = value.ReadValue<Vector2>();
     }
 
