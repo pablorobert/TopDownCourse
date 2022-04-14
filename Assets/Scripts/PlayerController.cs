@@ -16,7 +16,16 @@ public class PlayerController : MonoBehaviour
     {
         get; private set;
     }
-    private bool isRunning;
+
+    public bool IsRunning
+    {
+        get; private set;
+    }
+
+    public bool IsRolling
+    {
+        get; private set;
+    }
 
     public Vector2 Direction
     {
@@ -24,10 +33,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public bool IsRunning
-    {
-        get { return isRunning; }
-    }
+
 
     void Start()
     {
@@ -60,12 +66,26 @@ public class PlayerController : MonoBehaviour
         if (running)
         {
             speed = runSpeed;
-            isRunning = true;
+            IsRunning = true;
         }
         else
         {
             speed = originalSpeed;
-            isRunning = false;
+            IsRunning = false;
+        }
+    }
+
+    void OnRoll(bool roll)
+    {
+        if (roll)
+        {
+            speed = runSpeed;
+            IsRolling = true;
+        }
+        else
+        {
+            speed = originalSpeed;
+            IsRolling = false;
         }
     }
 
@@ -93,6 +113,14 @@ public class PlayerController : MonoBehaviour
             OnRun(true);
         if (value.canceled)
             OnRun(false);
+    }
+
+    public void OnRoll(InputAction.CallbackContext value)
+    {
+        if (value.started && direction.sqrMagnitude > 0)
+            OnRoll(true);
+        if (value.canceled)
+            OnRoll(false);
     }
 
     #endregion

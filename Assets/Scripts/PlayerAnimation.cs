@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
+    //should we use enum? 
     public const int PLAYER_IDLE = 0;
     public const int PLAYER_WALKING = 1;
     public const int PLAYER_RUNNING = 2;
+    //public const int PLAYER_ROLLING = 3;
 
+    public const int BASE_LAYER = 0;
     public const string ANIMATOR_PROPERTY = "transition";
+    public const string ANIMATOR_ROLLING_TRIGGER = "rolling";
+    public const string ANIMATOR_ROLL_NAME = "roll";
 
     private PlayerController playerController;
     private Animator anim;
@@ -29,7 +34,17 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (playerController.Direction.sqrMagnitude > 0)
         {
-            anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_WALKING);
+            if (playerController.IsRolling)
+            {
+                if (!anim.GetCurrentAnimatorStateInfo(BASE_LAYER).IsName(ANIMATOR_ROLL_NAME))
+                {
+                    anim.SetTrigger(ANIMATOR_ROLLING_TRIGGER);
+                }
+            }
+            else
+            {
+                anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_WALKING);
+            }
         }
         else
         {
