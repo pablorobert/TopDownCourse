@@ -135,9 +135,9 @@ GameObject:
   - component: {fileID: 12207}
   - component: {fileID: 12209}
   - component: {fileID: 12211}
+  - component: {fileID: 12212}
   - component: {fileID: 12206}
   - component: {fileID: 12210}
-  - component: {fileID: 12212}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  runSpeed: 10
 --- !u!212 &12207
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -217,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.48, y: -1.73, z: 0}
+  m_LocalPosition: {x: -0.03, y: -0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -30667,6 +30668,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6574f2ef-238e-4da3-aafb-ddcedb17c7b7
     m_ActionName: PlayerController/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 12206}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnRun
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c3398f4f-2f83-4a9f-b8ce-c09a7167aefa
+    m_ActionName: PlayerController/Run[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerController
