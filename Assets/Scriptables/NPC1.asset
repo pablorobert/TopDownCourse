@@ -15,4 +15,10 @@ MonoBehaviour:
   actor: {fileID: 0}
   profileImage: {fileID: 0}
   sentence: 
-  sentences: []
+  sentences:
+  - actorName: Candace
+    actorImage: {fileID: 0}
+    sentence:
+      portuguese: "Ol\xE1"
+      english: 
+      spanish: 

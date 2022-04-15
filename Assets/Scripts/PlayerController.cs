@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
         get; private set;
     }
 
+    public bool IsSpeaking
+    {
+        get; set;
+    }
+
     public Vector2 Direction
     {
         get { return direction; }
@@ -96,6 +101,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnTalk(bool talking)
+    {
+        IsSpeaking = talking;
+    }
+
     #endregion
 
     #region New Input System
@@ -128,6 +138,14 @@ public class PlayerController : MonoBehaviour
             OnRoll(true);
         if (value.canceled)
             OnRoll(false);
+    }
+
+    public void OnTalk(InputAction.CallbackContext value)
+    {
+        if (value.started)
+            OnTalk(true);
+        if (value.canceled)
+            OnTalk(false);
     }
 
     #endregion
