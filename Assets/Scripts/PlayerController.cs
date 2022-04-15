@@ -32,9 +32,6 @@ public class PlayerController : MonoBehaviour
         get { return direction; }
     }
 
-
-
-
     void Start()
     {
         originalSpeed = speed;
@@ -44,6 +41,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //OnRun();
+
+        /*Keyboard kb = InputSystem.GetDevice<Keyboard>();
+        if (kb.spaceKey.wasPressedThisFrame) {
+
+        }
+
+        Mouse mouse = InputSystem.GetDevice<Mouse>();
+        if (mouse.rightButton.wasPressedThisFrame) {
+
+        }*/
     }
     void FixedUpdate()
     {
@@ -100,7 +107,7 @@ public class PlayerController : MonoBehaviour
             direction = Vector2.zero;
             IsWalking = false;
         }
-        else
+        else if (value.performed)
         {
             IsWalking = true;
             direction = value.ReadValue<Vector2>();
