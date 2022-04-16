@@ -37,7 +37,7 @@ MonoBehaviour:
   - actorName: Candace
     actorImage: {fileID: -2354162375175394062, guid: 04bdf25eff6dbeb4ca3e2c92eb992400, type: 3}
     sentence:
-      portuguese: "Voc\xEA precisa falar com a est\xE1tua"
+      portuguese: "Voc\xEA precisa ler a placa na est\xE1tua"
       english: 
       spanish: 
   - actorName: 

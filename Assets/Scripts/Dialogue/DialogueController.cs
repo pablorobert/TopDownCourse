@@ -81,7 +81,7 @@ public class DialogueController : MonoBehaviour
         sentences[lastIndex] == speechText.text)
         {
             speechText.text = "";
-            if (actorNames[currentIndex] != null)
+            if (actorNames[currentIndex] != null && actorNames[currentIndex] != "")
             {
                 actorNameText.text = actorNames[currentIndex];
             }
@@ -99,13 +99,31 @@ public class DialogueController : MonoBehaviour
         if (!isVisible)
         {
             isVisible = true;
+
             this.sentences = sentences;
             this.actorNames = actorNames;
             this.actorImages = actorImages;
+
             currentIndex = 0;
+
             speechText.text = "";
-            actorNameText.text = actorNames[currentIndex];
-            profileImage.sprite = actorImages[currentIndex];
+            if (actorNames[currentIndex] != null)
+            {
+                actorNameText.text = actorNames[currentIndex];
+            }
+            else
+            {
+                actorNameText.text = "";
+            }
+            if (actorImages[currentIndex] != null)
+            {
+                profileImage.gameObject.SetActive(true);
+                profileImage.sprite = actorImages[currentIndex];
+            }
+            else
+            {
+                profileImage.gameObject.SetActive(false);
+            }
 
             dialogueWindow.SetActive(true);
 
