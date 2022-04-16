@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
+    public const string ANIMATOR_NPC_ISWALKING = "isWalking";
     public bool randomWalk;
     public float speed;
     private float originalSpeed;
@@ -12,9 +13,12 @@ public class NPC : MonoBehaviour
     private bool isLookingLeft;
     private int currentIndex;
 
+    private Animator anim;
+
     void Awake()
     {
         player = FindObjectOfType<PlayerController>();
+        anim = GetComponent<Animator>();
     }
 
     void Start()
@@ -34,10 +38,12 @@ public class NPC : MonoBehaviour
         if (DialogueController.Instance.IsVisible)
         {
             speed = 0;
+            anim.SetBool(ANIMATOR_NPC_ISWALKING, false);
             FacePlayer();
         }
         else
         {
+            anim.SetBool(ANIMATOR_NPC_ISWALKING, true);
             speed = originalSpeed;
         }
     }
