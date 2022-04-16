@@ -12,10 +12,12 @@ public class Dialogue : MonoBehaviour
 
     public DialogueSettings dialogue;
 
-
     private PlayerController player;
 
     private List<string> sentences = new List<string>();
+    private List<string> actorNames = new List<string>();
+    private List<Sprite> actorImages = new List<Sprite>();
+
 
     void Awake()
     {
@@ -24,14 +26,18 @@ public class Dialogue : MonoBehaviour
 
     void Start()
     {
-        GetSentences();
+        GetDialogueInfo();
     }
 
     void Update()
     {
         if (isPlayerDetected && player.IsSpeaking)
         {
-            DialogueController.Instance.Speak(sentences.ToArray());
+            DialogueController.Instance.Speak(
+                sentences.ToArray(),
+                actorNames.ToArray(),
+                actorImages.ToArray()
+            );
         }
     }
 
@@ -40,12 +46,30 @@ public class Dialogue : MonoBehaviour
         ShowDialog();
     }
 
-    void GetSentences()
+    void GetDialogueInfo()
     {
+
         sentences.Clear();
+        actorNames.Clear();
+        actorImages.Clear();
+
         for (int i = 0; i < dialogue.sentences.Count; i++)
         {
-            sentences.Add(dialogue.sentences[i].sentence.portuguese);
+            switch (DialogueController.Instance.locale)
+            {
+                case Locales.pt_BR:
+                    sentences.Add(dialogue.sentences[i].sentence.portuguese);
+                    break;
+                case Locales.en_US:
+                    sentences.Add(dialogue.sentences[i].sentence.english);
+                    break;
+                case Locales.es_ES:
+                    sentences.Add(dialogue.sentences[i].sentence.spanish);
+                    break;
+            }
+
+            actorNames.Add(dialogue.sentences[i].actorName);
+            actorImages.Add(dialogue.sentences[i].actorImage);
         }
     }
 

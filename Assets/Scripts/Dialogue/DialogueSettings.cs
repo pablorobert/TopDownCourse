@@ -12,6 +12,7 @@ public class DialogueSettings : ScriptableObject
     [Header("Dialogue")]
     public Sprite profileImage;
 
+    [TextArea]
     public string sentence;
 
     public List<Sentence> sentences = new List<Sentence>();
@@ -48,7 +49,7 @@ public class DialogEditor : Editor
         DialogueSettings settings = (DialogueSettings)target;
 
         Languages languages = new Languages();
-        languages.english = settings.sentence;
+        languages.portuguese = settings.sentence;
 
         Sentence sentence = new Sentence();
         sentence.actorImage = settings.profileImage;

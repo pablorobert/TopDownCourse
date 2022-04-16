@@ -17,8 +17,32 @@ MonoBehaviour:
   sentence: 
   sentences:
   - actorName: Candace
-    actorImage: {fileID: 0}
+    actorImage: {fileID: -2354162375175394062, guid: 04bdf25eff6dbeb4ca3e2c92eb992400, type: 3}
     sentence:
       portuguese: "Ol\xE1"
+      english: 
+      spanish: 
+  - actorName: Hero
+    actorImage: {fileID: 672162196558630019, guid: 04bdf25eff6dbeb4ca3e2c92eb992400, type: 3}
+    sentence:
+      portuguese: "O que eu fa\xE7o?"
+      english: 
+      spanish: 
+  - actorName: 
+    actorImage: {fileID: 0}
+    sentence:
+      portuguese: "Acabei de chegar, n\xE3o sei o que fazer"
+      english: 
+      spanish: 
+  - actorName: Candace
+    actorImage: {fileID: -2354162375175394062, guid: 04bdf25eff6dbeb4ca3e2c92eb992400, type: 3}
+    sentence:
+      portuguese: "Voc\xEA precisa falar com a est\xE1tua"
+      english: 
+      spanish: 
+  - actorName: 
+    actorImage: {fileID: 0}
+    sentence:
+      portuguese: "J\xE1 tentou fazer isso?"
       english: 
       spanish: 
