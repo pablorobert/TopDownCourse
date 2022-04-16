@@ -38105,6 +38105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1787472293}
   - component: {fileID: 1787472292}
+  - component: {fileID: 1787472295}
   - component: {fileID: 1787472294}
   m_Layer: 0
   m_Name: FirstSign
@@ -38154,11 +38155,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1787472291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89ed5d9f015ca9b48a30b0ebbba4b1c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 05b01be639ba6cd4ca036cb1371d99d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NPC1: {fileID: 2129976523}
+  NPC: {fileID: 2129976523}
   newDialogue: {fileID: 11400000, guid: 995c16e76ae72d94aaad6bbb68839503, type: 2}
+  settings: {fileID: 11400000, guid: 8152cd00c990a934a981d315359ff767, type: 2}
+--- !u!114 &1787472295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787472291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 673d0f23a7ec42e45b37061471008a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
   timeToDestroy: 0.5
   settings: {fileID: 11400000, guid: 8152cd00c990a934a981d315359ff767, type: 2}
 --- !u!1 &1822033991

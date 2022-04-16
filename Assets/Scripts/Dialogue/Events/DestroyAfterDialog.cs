@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirstSign : MonoBehaviour
+public class DestroyAfterDialog : MonoBehaviour
 {
-    public GameObject NPC1; //change her dialogue
-    public DialogueSettings newDialogue;
+    public GameObject source; //item to be destroyed
     public float timeToDestroy = 0.5f;
 
     public DialogueSettings settings;
 
+    void Start()
+    {
+        if (source == null)
+            source = this.gameObject;
+    }
+
     public void Kill()
     {
-        //Get the npc
-        Dialogue dialogue = NPC1.GetComponent<Dialogue>();
-        dialogue.dialogue = newDialogue;
-        dialogue.GetDialogueInfo();
-
         //destroy this one
         gameObject.SetActive(false);
         Destroy(gameObject, timeToDestroy);
@@ -31,5 +31,4 @@ public class FirstSign : MonoBehaviour
     {
         settings.OnComplete -= Kill;
     }
-
 }
