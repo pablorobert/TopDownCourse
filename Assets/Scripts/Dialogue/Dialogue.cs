@@ -18,10 +18,12 @@ public class Dialogue : MonoBehaviour
     private List<string> actorNames = new List<string>();
     private List<Sprite> actorImages = new List<Sprite>();
 
+    private NPC npc;
 
     void Awake()
     {
         player = FindObjectOfType<PlayerController>();
+        npc = GetComponent<NPC>();
     }
 
     void Start()
@@ -36,7 +38,8 @@ public class Dialogue : MonoBehaviour
             DialogueController.Instance.Speak(
                 sentences.ToArray(),
                 actorNames.ToArray(),
-                actorImages.ToArray()
+                actorImages.ToArray(),
+                dialogue
             );
         }
     }
@@ -46,7 +49,7 @@ public class Dialogue : MonoBehaviour
         ShowDialog();
     }
 
-    void GetDialogueInfo()
+    public void GetDialogueInfo()
     {
 
         sentences.Clear();
@@ -86,6 +89,7 @@ public class Dialogue : MonoBehaviour
         if (hit != null)
         {
             isPlayerDetected = true;
+            if (npc != null) npc.FacePlayer();
         }
         else
         {

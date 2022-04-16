@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEditor;
 
 [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue/New Dialogue")]
@@ -16,6 +17,12 @@ public class DialogueSettings : ScriptableObject
     public string sentence;
 
     public List<Sentence> sentences = new List<Sentence>();
+
+    public UnityAction OnComplete;
+    public void RaiseEvent()
+    {
+        OnComplete?.Invoke();
+    }
 }
 
 [System.Serializable]

@@ -13,17 +13,17 @@ public enum Locales
 
 public class DialogueController : MonoBehaviour
 {
+    public static DialogueController Instance;
+
     [Header("Components")]
     public GameObject dialogueWindow;
-
     public Image profileImage;
-
-    //public Text speechText;
     public TMP_Text speechText;
-
     public Text actorNameText;
     public Button nextSentenceButton;
     public TMP_Text nextSentenceText;
+
+    [HideInInspector] public DialogueSettings dialogueSettings;
 
     [Header("Settings")]
     public float typingSpeed;
@@ -31,7 +31,10 @@ public class DialogueController : MonoBehaviour
     public Locales locale;
 
     //control 
-    private bool isVisible;
+    public bool IsVisible
+    {
+        get; private set;
+    }
 
     private bool isButtonVisible;
 
@@ -42,7 +45,7 @@ public class DialogueController : MonoBehaviour
     private string[] actorNames;
 
     private Sprite[] actorImages;
-    public static DialogueController Instance;
+
 
     void Awake()
     {
@@ -74,7 +77,11 @@ public class DialogueController : MonoBehaviour
         if (currentIndex == sentences.Length) //out of sentences
         {
             dialogueWindow.SetActive(false);
-            isVisible = false;
+            IsVisible = false;
+
+            //informs to listeners the conversation is done
+            dialogueSettings.RaiseEvent();
+
             return;
         }
         if (lastIndex < sentences.Length - 1 &&
@@ -94,11 +101,13 @@ public class DialogueController : MonoBehaviour
 
     }
 
-    public void Speak(string[] sentences, string[] actorNames, Sprite[] actorImages)
+    public void Speak(string[] sentences, string[] actorNames, Sprite[] actorImages, DialogueSettings settings)
     {
-        if (!isVisible)
+        if (!IsVisible)
         {
-            isVisible = true;
+            IsVisible = true;
+
+            this.dialogueSettings = settings;
 
             this.sentences = sentences;
             this.actorNames = actorNames;
