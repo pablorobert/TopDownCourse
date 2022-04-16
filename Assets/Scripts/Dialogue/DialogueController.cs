@@ -22,6 +22,8 @@ public class DialogueController : MonoBehaviour
     public TMP_Text speechText;
 
     public Text actorNameText;
+    public Button nextSentenceButton;
+    public TMP_Text nextSentenceText;
 
     [Header("Settings")]
     public float typingSpeed;
@@ -30,6 +32,8 @@ public class DialogueController : MonoBehaviour
 
     //control 
     private bool isVisible;
+
+    private bool isButtonVisible;
 
     private int currentIndex;
 
@@ -48,11 +52,19 @@ public class DialogueController : MonoBehaviour
     IEnumerator TypeSentence()
     {
         speechText.text = "";
+        nextSentenceButton.gameObject.SetActive(false);
+        nextSentenceText.text = ">>";
+        if (currentIndex == sentences.Length - 1)
+        {
+            nextSentenceText.text = "End";
+        }
+
         foreach (char letter in sentences[currentIndex].ToCharArray())
         {
             speechText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
+        nextSentenceButton.gameObject.SetActive(true);
     }
 
     public void NextSentence()

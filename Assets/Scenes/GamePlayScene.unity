@@ -33996,6 +33996,8 @@ MonoBehaviour:
   profileImage: {fileID: 226939411}
   speechText: {fileID: 752139553}
   actorNameText: {fileID: 477885073}
+  nextSentenceButton: {fileID: 1688882927}
+  nextSentenceText: {fileID: 984966306}
   typingSpeed: 0.025
   locale: 0
 --- !u!1 &722773989
@@ -35371,7 +35373,7 @@ GameObject:
   - component: {fileID: 984966307}
   - component: {fileID: 984966306}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ButtonText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37828,7 +37830,7 @@ GameObject:
   - component: {fileID: 1688882928}
   - component: {fileID: 1688882927}
   m_Layer: 5
-  m_Name: Button
+  m_Name: NextSentenceButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
