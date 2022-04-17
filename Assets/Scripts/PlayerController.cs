@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
         get; private set;
     }
 
+    public bool IsCutting
+    {
+        get; private set;
+    }
+
     public bool IsSpeaking
     {
         get; set;
@@ -92,18 +97,30 @@ public class PlayerController : MonoBehaviour
         if (roll)
         {
             speed = runSpeed;
-            IsRolling = true;
         }
         else
         {
             speed = originalSpeed;
-            IsRolling = false;
         }
+        IsRolling = roll;
     }
 
     void OnTalk(bool talking)
     {
         IsSpeaking = talking;
+    }
+
+    void OnTool(bool toolling)
+    {
+        if (toolling)
+        {
+            speed = 0f;
+        }
+        else
+        {
+            speed = originalSpeed;
+        }
+        IsCutting = toolling;
     }
 
     #endregion
@@ -126,7 +143,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnRun(InputAction.CallbackContext value)
     {
-        if (value.started && IsWalking)
+        if (value.performed && IsWalking)
             OnRun(true);
         if (value.canceled)
             OnRun(false);
@@ -134,7 +151,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnRoll(InputAction.CallbackContext value)
     {
-        if (value.started && direction.sqrMagnitude > 0)
+        if (value.performed && direction.sqrMagnitude > 0)
             OnRoll(true);
         if (value.canceled)
             OnRoll(false);
@@ -142,10 +159,18 @@ public class PlayerController : MonoBehaviour
 
     public void OnTalk(InputAction.CallbackContext value)
     {
-        if (value.started)
+        if (value.performed)
             OnTalk(true);
         if (value.canceled)
             OnTalk(false);
+    }
+
+    public void OnTool(InputAction.CallbackContext value)
+    {
+        if (value.performed)
+            OnTool(true);
+        if (value.canceled)
+            OnTool(false);
     }
 
     #endregion

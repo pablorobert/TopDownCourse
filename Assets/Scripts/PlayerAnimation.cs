@@ -8,7 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     public const int PLAYER_IDLE = 0;
     public const int PLAYER_WALKING = 1;
     public const int PLAYER_RUNNING = 2;
-    //public const int PLAYER_ROLLING = 3;
+    public const int PLAYER_CUTTING = 3;
 
     public const int BASE_LAYER = 0;
     public const string ANIMATOR_PROPERTY = "transition";
@@ -28,6 +28,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         OnMove();
         OnRun();
+        OnCut();
     }
 
     void OnMove()
@@ -70,6 +71,15 @@ public class PlayerAnimation : MonoBehaviour
         else
         {
             anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_IDLE);
+        }
+    }
+
+    void OnCut()
+    {
+        if (playerController.IsCutting)
+        {
+            anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_CUTTING);
+
         }
     }
 
