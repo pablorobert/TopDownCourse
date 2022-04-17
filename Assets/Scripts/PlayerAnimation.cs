@@ -9,6 +9,7 @@ public class PlayerAnimation : MonoBehaviour
     public const int PLAYER_WALKING = 1;
     public const int PLAYER_RUNNING = 2;
     public const int PLAYER_CUTTING = 3;
+    public const int PLAYER_DIGGING = 4;
 
     public const int BASE_LAYER = 0;
     public const string ANIMATOR_PROPERTY = "transition";
@@ -29,6 +30,7 @@ public class PlayerAnimation : MonoBehaviour
         OnMove();
         OnRun();
         OnCut();
+        OnDig();
     }
 
     void OnMove()
@@ -79,7 +81,14 @@ public class PlayerAnimation : MonoBehaviour
         if (playerController.IsCutting)
         {
             anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_CUTTING);
+        }
+    }
 
+    void OnDig()
+    {
+        if (playerController.IsDigging)
+        {
+            anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_DIGGING);
         }
     }
 

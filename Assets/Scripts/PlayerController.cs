@@ -8,10 +8,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float runSpeed;
 
+    private enum PlayerTools
+    {
+        Axe,
+        Shovel
+    }
+
+    private PlayerTools activeTool = PlayerTools.Axe;
+
     private float originalSpeed;
 
     private Rigidbody2D rig;
     private Vector2 direction;
+
     public bool IsWalking
     {
         get; private set;
@@ -27,7 +36,13 @@ public class PlayerController : MonoBehaviour
         get; private set;
     }
 
+    [SerializeField]
     public bool IsCutting
+    {
+        get; private set;
+    }
+    [SerializeField]
+    public bool IsDigging
     {
         get; private set;
     }
@@ -112,15 +127,9 @@ public class PlayerController : MonoBehaviour
 
     void OnTool(bool toolling)
     {
-        if (toolling)
-        {
-            speed = 0f;
-        }
-        else
-        {
-            speed = originalSpeed;
-        }
-        IsCutting = toolling;
+        IsCutting = activeTool == PlayerTools.Axe ? toolling : false;
+        IsDigging = activeTool == PlayerTools.Shovel ? toolling : false;
+        speed = toolling ? 0f : originalSpeed;
     }
 
     #endregion
@@ -171,6 +180,16 @@ public class PlayerController : MonoBehaviour
             OnTool(true);
         if (value.canceled)
             OnTool(false);
+    }
+
+    public void OnAxe(InputAction.CallbackContext value)
+    {
+        activeTool = PlayerTools.Axe;
+    }
+
+    public void OnShovel(InputAction.CallbackContext value)
+    {
+        activeTool = PlayerTools.Shovel;
     }
 
     #endregion
