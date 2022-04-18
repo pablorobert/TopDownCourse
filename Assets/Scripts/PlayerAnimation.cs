@@ -10,6 +10,7 @@ public class PlayerAnimation : MonoBehaviour
     public const int PLAYER_RUNNING = 2;
     public const int PLAYER_CUTTING = 3;
     public const int PLAYER_DIGGING = 4;
+    public const int PLAYER_WATERING = 5;
 
     public const int BASE_LAYER = 0;
     public const string ANIMATOR_PROPERTY = "transition";
@@ -17,7 +18,13 @@ public class PlayerAnimation : MonoBehaviour
     public const string ANIMATOR_ROLL_NAME = "roll";
 
     private PlayerController playerController;
+    private PlayerItems playerItems;
     private Animator anim;
+
+    void Awake()
+    {
+        playerItems = FindObjectOfType<PlayerItems>();
+    }
     void Start()
     {
         playerController = GetComponent<PlayerController>();
@@ -31,6 +38,7 @@ public class PlayerAnimation : MonoBehaviour
         OnRun();
         OnCut();
         OnDig();
+        OnWater();
     }
 
     void OnMove()
@@ -41,6 +49,7 @@ public class PlayerAnimation : MonoBehaviour
             {
                 if (!anim.GetCurrentAnimatorStateInfo(BASE_LAYER).IsName(ANIMATOR_ROLL_NAME))
                 {
+                    playerController.IsRolling = false;
                     anim.SetTrigger(ANIMATOR_ROLLING_TRIGGER);
                 }
             }
@@ -89,6 +98,15 @@ public class PlayerAnimation : MonoBehaviour
         if (playerController.IsDigging)
         {
             anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_DIGGING);
+        }
+    }
+
+    void OnWater()
+    {
+        //print(playerController.IsWatering);
+        if (playerController.IsWatering && playerItems.currentWater > 0)
+        {
+            anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_WATERING);
         }
     }
 

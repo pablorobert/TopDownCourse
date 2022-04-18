@@ -11,14 +11,18 @@ public class PlayerController : MonoBehaviour
     private enum PlayerTools
     {
         Axe,
-        Shovel
+        Shovel,
+        Bucket
     }
 
     private PlayerTools activeTool = PlayerTools.Axe;
 
     private float originalSpeed;
+    private float waterTime;
+    private bool decreaseWater;
 
     private Rigidbody2D rig;
+    private PlayerItems playerItems;
     private Vector2 direction;
 
     public bool IsWalking
@@ -33,25 +37,28 @@ public class PlayerController : MonoBehaviour
 
     public bool IsRolling
     {
-        get; private set;
+        get; set;
     }
-
-    [SerializeField]
     public bool IsCutting
     {
         get; private set;
     }
-    [SerializeField]
     public bool IsDigging
     {
         get; private set;
     }
-
+    public bool IsWatering
+    {
+        get; private set;
+    }
+    public bool IsActing
+    {
+        get; set;
+    }
     public bool IsSpeaking
     {
         get; set;
     }
-
     public Vector2 Direction
     {
         get { return direction; }
@@ -61,27 +68,48 @@ public class PlayerController : MonoBehaviour
     {
         originalSpeed = speed;
         rig = GetComponent<Rigidbody2D>();
+        playerItems = GetComponent<PlayerItems>();
     }
 
     void Update()
     {
-        //OnRun();
-
         /*Keyboard kb = InputSystem.GetDevice<Keyboard>();
         if (kb.spaceKey.wasPressedThisFrame) {
 
         }
-
         Mouse mouse = InputSystem.GetDevice<Mouse>();
         if (mouse.rightButton.wasPressedThisFrame) {
 
         }*/
+        CheckWater();
     }
     void FixedUpdate()
     {
         OnMove();
     }
 
+    void CheckWater()
+    {
+        if (!decreaseWater)
+            return;
+
+        if (IsWatering)
+        {
+            if (playerItems.currentWater > 0)
+            {
+                waterTime += Time.deltaTime;
+                if (waterTime > 1f) //decrease for second
+                {
+                    waterTime = 0;
+                    playerItems.currentWater--;
+                }
+            }
+            else
+            {
+                IsWatering = false; //we dont have water
+            }
+        }
+    }
 
     #region Movement
 
@@ -125,11 +153,20 @@ public class PlayerController : MonoBehaviour
         IsSpeaking = talking;
     }
 
+    void OnAct(bool acting)
+    {
+        IsActing = acting;
+    }
+
     void OnTool(bool toolling)
     {
+        speed = toolling ? 0f : originalSpeed;
+
         IsCutting = activeTool == PlayerTools.Axe ? toolling : false;
         IsDigging = activeTool == PlayerTools.Shovel ? toolling : false;
-        speed = toolling ? 0f : originalSpeed;
+        IsWatering = activeTool == PlayerTools.Bucket ? toolling : false;
+
+        //CheckWater();
     }
 
     #endregion
@@ -160,7 +197,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnRoll(InputAction.CallbackContext value)
     {
-        if (value.performed && direction.sqrMagnitude > 0)
+        if (value.started && direction.sqrMagnitude > 0)
             OnRoll(true);
         if (value.canceled)
             OnRoll(false);
@@ -176,10 +213,31 @@ public class PlayerController : MonoBehaviour
 
     public void OnTool(InputAction.CallbackContext value)
     {
-        if (value.performed)
+        if (value.started)
+        {
             OnTool(true);
+        }
+        if (value.performed)
+        {
+            decreaseWater = true;
+        }
         if (value.canceled)
+        {
+            decreaseWater = false;
             OnTool(false);
+        }
+    }
+
+    public void OnAct(InputAction.CallbackContext value)
+    {
+        if (value.performed)
+        {
+            OnAct(true);
+        }
+        if (value.canceled)
+        {
+            OnAct(false);
+        }
     }
 
     public void OnAxe(InputAction.CallbackContext value)
@@ -190,6 +248,11 @@ public class PlayerController : MonoBehaviour
     public void OnShovel(InputAction.CallbackContext value)
     {
         activeTool = PlayerTools.Shovel;
+    }
+
+    public void OnBucket(InputAction.CallbackContext value)
+    {
+        activeTool = PlayerTools.Bucket;
     }
 
     #endregion

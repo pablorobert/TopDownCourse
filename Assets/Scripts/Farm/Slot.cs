@@ -7,6 +7,9 @@ public class Slot : MonoBehaviour
 
     private bool isDig;
     public int digAmount;
+
+    public float waterAmount;
+    private float currentWater;
     private int originalDigAmount;
 
     public Sprite hole;
@@ -14,6 +17,19 @@ public class Slot : MonoBehaviour
     public Sprite carrot;
 
     private SpriteRenderer spriteRenderer;
+    private PlayerItems playerItems;
+    private PlayerController playerController;
+
+    private bool isDetectingPlayer;
+    private bool playerWatering;
+    private bool isHoleVisible;
+    private bool isCarrotVisible;
+
+    void Awake()
+    {
+        playerItems = FindObjectOfType<PlayerItems>();
+        playerController = FindObjectOfType<PlayerController>();
+    }
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -23,6 +39,24 @@ public class Slot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isHoleVisible && playerWatering)
+        {
+            currentWater += 0.01f;
+        }
+        if (currentWater >= waterAmount)
+        {
+            spriteRenderer.sprite = carrot;
+            isCarrotVisible = true;
+        }
+        if (isCarrotVisible && isDetectingPlayer && playerController.IsActing)
+        {
+            //harvest
+            spriteRenderer.sprite = hole;
+            playerItems.carrots++;
+            isCarrotVisible = false;
+            isHoleVisible = true;
+            waterAmount *= 1.1f; //10% increase
+        }
 
     }
     void OnHit()
@@ -31,11 +65,11 @@ public class Slot : MonoBehaviour
         if (digAmount < originalDigAmount / 2)
         {
             spriteRenderer.sprite = hole;
+            isHoleVisible = true;
         }
         else if (digAmount <= 0)
         {
             digAmount = 0;
-            spriteRenderer.sprite = carrot;
         }
     }
 
@@ -44,6 +78,26 @@ public class Slot : MonoBehaviour
         if (!isDig && collider.CompareTag("Shovel"))
         {
             OnHit();
+        }
+        if (collider.CompareTag("Water"))
+        {
+            playerWatering = true;
+        }
+        if (collider.CompareTag("Player"))
+        {
+            isDetectingPlayer = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player"))
+        {
+            isDetectingPlayer = false;
+        }
+        if (collider.CompareTag("Water"))
+        {
+            playerWatering = false;
         }
     }
 }
