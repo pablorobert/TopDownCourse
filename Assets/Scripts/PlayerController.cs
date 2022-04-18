@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
     private PlayerItems playerItems;
     private Vector2 direction;
 
+    public bool IsPaused
+    {
+        get; set;
+    }
     public bool IsWalking
     {
         get; private set;
@@ -81,10 +85,14 @@ public class PlayerController : MonoBehaviour
         if (mouse.rightButton.wasPressedThisFrame) {
 
         }*/
+        if (IsPaused) return;
+
         CheckWater();
     }
     void FixedUpdate()
     {
+        if (IsPaused) return;
+
         OnMove();
     }
 

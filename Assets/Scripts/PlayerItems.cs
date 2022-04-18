@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerItems : MonoBehaviour
 {
-    public int totalWood;
+    public int currentWood;
     [SerializeField] private int maxWood;
 
     public int currentWater;
     [SerializeField] private int maxWater;
 
     public int carrots;
+    [SerializeField] private int maxCarrots;
 
-    public void addWater(int water)
+    public int fishes;
+    [SerializeField] private int maxFishes;
+
+    public void AddWater(int water)
     {
         currentWater += water;
         if (currentWater >= maxWater)
@@ -21,12 +25,30 @@ public class PlayerItems : MonoBehaviour
         }
     }
 
-    public void addWood(int wood)
+    public void AddWood(int wood)
     {
-        totalWood += wood;
-        if (totalWood >= maxWood)
+        currentWood += wood;
+        if (currentWood >= maxWood)
         {
-            totalWood = maxWood;
+            currentWood = maxWood;
+        }
+    }
+
+    public void AddCarrot(int carrot)
+    {
+        carrots += carrot;
+        if (carrots >= maxCarrots)
+        {
+            carrots = maxCarrots;
+        }
+    }
+
+    public void AddFish(int fish)
+    {
+        fishes += fish;
+        if (fishes >= maxFishes)
+        {
+            fishes = maxFishes;
         }
     }
 

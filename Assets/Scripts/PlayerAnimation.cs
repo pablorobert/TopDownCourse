@@ -11,19 +11,23 @@ public class PlayerAnimation : MonoBehaviour
     public const int PLAYER_CUTTING = 3;
     public const int PLAYER_DIGGING = 4;
     public const int PLAYER_WATERING = 5;
-
+    //public const int PLAYER_ = 6;
     public const int BASE_LAYER = 0;
     public const string ANIMATOR_PROPERTY = "transition";
     public const string ANIMATOR_ROLLING_TRIGGER = "rolling";
+    public const string ANIMATOR_FISHING_TRIGGER = "fishing";
     public const string ANIMATOR_ROLL_NAME = "roll";
 
     private PlayerController playerController;
     private PlayerItems playerItems;
     private Animator anim;
 
+    private Fishing fishing;
+
     void Awake()
     {
         playerItems = FindObjectOfType<PlayerItems>();
+        fishing = FindObjectOfType<Fishing>();
     }
     void Start()
     {
@@ -108,6 +112,18 @@ public class PlayerAnimation : MonoBehaviour
         {
             anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_WATERING);
         }
+    }
+
+    public void OnCast()
+    {
+        playerController.IsPaused = true;
+        anim.SetTrigger(ANIMATOR_FISHING_TRIGGER);
+    }
+
+    public void OnCatch()
+    {
+        playerController.IsPaused = false;
+        fishing.OnCatch();
     }
 
     #endregion

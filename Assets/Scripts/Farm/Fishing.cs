@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Water : MonoBehaviour
+public class Fishing : MonoBehaviour
 {
-    public int waterAmount = 5;
     private bool isDetectingPlayer;
+
     private PlayerController playerController;
     private PlayerItems playerItems;
+
+    private PlayerAnimation playerAnim;
+
+    public int chance;
+
+    public GameObject fish;
 
     void Awake()
     {
         playerController = FindObjectOfType<PlayerController>();
-        playerItems = FindObjectOfType<PlayerItems>();
+        playerItems = playerController.GetComponent<PlayerItems>();
+        playerAnim = playerController.GetComponent<PlayerAnimation>();
     }
 
     void Update()
@@ -21,11 +28,22 @@ public class Water : MonoBehaviour
         if (isDetectingPlayer && playerController.IsActing)
         {
             playerController.IsActing = false;
-
-            playerItems.AddWater(waterAmount);
+            playerAnim.OnCast();
         }
     }
 
+    public void OnCatch()
+    {
+        int rand = Random.Range(0, 100);
+        if (rand <= chance)
+        {
+            Instantiate(
+                fish,
+                playerController.transform.position + new Vector3(Random.Range(-2f, 2f), 0f, 0f),
+                transform.rotation
+            );
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D collider)
     {

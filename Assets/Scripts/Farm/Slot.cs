@@ -52,7 +52,7 @@ public class Slot : MonoBehaviour
         {
             //harvest
             spriteRenderer.sprite = hole;
-            playerItems.carrots++;
+            playerItems.AddCarrot(1);
             isCarrotVisible = false;
             isHoleVisible = true;
             waterAmount *= 1.1f; //10% increase
