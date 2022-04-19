@@ -48,13 +48,15 @@ public class Slot : MonoBehaviour
             spriteRenderer.sprite = carrot;
             isCarrotVisible = true;
         }
-        if (isCarrotVisible && isDetectingPlayer && playerController.IsActing)
+        if (isCarrotVisible && isDetectingPlayer && playerController.IsActing &&
+        !playerItems.IsCarrotFull())
         {
             //harvest
             spriteRenderer.sprite = hole;
             playerItems.AddCarrot(1);
             isCarrotVisible = false;
             isHoleVisible = true;
+            currentWater = 0;
             waterAmount *= 1.1f; //10% increase
         }
 

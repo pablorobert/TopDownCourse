@@ -13,6 +13,8 @@ public class Fishing : MonoBehaviour
 
     public int chance;
 
+    public Transform fishLocation;
+
     public GameObject fish;
 
     void Awake()
@@ -39,7 +41,7 @@ public class Fishing : MonoBehaviour
         {
             Instantiate(
                 fish,
-                playerController.transform.position + new Vector3(Random.Range(-2f, 2f), 0f, 0f),
+                fishLocation.position + new Vector3(Random.Range(-2f, 2f), 0f, 0f),
                 transform.rotation
             );
         }

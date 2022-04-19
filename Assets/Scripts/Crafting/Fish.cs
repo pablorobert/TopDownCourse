@@ -9,8 +9,12 @@ public class Fish : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            collider.GetComponent<PlayerItems>().AddFish(1);
-            Destroy(gameObject);
+            PlayerItems playerItems = collider.GetComponent<PlayerItems>();
+            if (!playerItems.IsFishFull())
+            {
+                playerItems.AddFish(1);
+                Destroy(gameObject);
+            }
         }
     }
 }

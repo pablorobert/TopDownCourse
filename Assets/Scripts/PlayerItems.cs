@@ -52,5 +52,47 @@ public class PlayerItems : MonoBehaviour
         }
     }
 
+    public bool IsWoodFull()
+    {
+        return currentWood == maxWood;
+    }
+
+    public bool IsCarrotFull()
+    {
+        return carrots == maxCarrots;
+    }
+
+    public bool IsFishFull()
+    {
+        return fishes == maxFishes;
+    }
+
+    public float waterFillAmount()
+    {
+        if (maxWood == 0)
+            return 0;
+        return (float)currentWater / (float)maxWater;
+    }
+    public float woodFillAmount()
+    {
+        if (maxWood == 0)
+            return 0;
+        return (float)currentWood / (float)maxWood;
+    }
+
+    public float carrotFillAmount()
+    {
+        if (maxCarrots == 0)
+            return 0;
+        return (float)carrots / (float)maxCarrots;
+    }
+
+    public float fishFillAmount()
+    {
+        if (maxFishes == 0)
+            return 0;
+        return (float)fishes / (float)maxFishes;
+    }
+
 
 }

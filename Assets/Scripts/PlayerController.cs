@@ -2,24 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
+
+public enum PlayerTools
+{
+    Axe,
+    Shovel,
+    Bucket
+}
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float runSpeed;
 
-    private enum PlayerTools
-    {
-        Axe,
-        Shovel,
-        Bucket
-    }
-
     private PlayerTools activeTool = PlayerTools.Axe;
+
+    public PlayerTools ActiveTool
+    {
+        get { return activeTool; }
+    }
 
     private float originalSpeed;
     private float waterTime;
     private bool decreaseWater;
+
+    [Header("Events")]
+    public UnityEvent OnChangeTool;
 
     private Rigidbody2D rig;
     private PlayerItems playerItems;
@@ -73,6 +82,7 @@ public class PlayerController : MonoBehaviour
         originalSpeed = speed;
         rig = GetComponent<Rigidbody2D>();
         playerItems = GetComponent<PlayerItems>();
+        OnChangeTool?.Invoke();
     }
 
     void Update()
@@ -173,7 +183,6 @@ public class PlayerController : MonoBehaviour
         IsCutting = activeTool == PlayerTools.Axe ? toolling : false;
         IsDigging = activeTool == PlayerTools.Shovel ? toolling : false;
         IsWatering = activeTool == PlayerTools.Bucket ? toolling : false;
-
         //CheckWater();
     }
 
@@ -251,16 +260,19 @@ public class PlayerController : MonoBehaviour
     public void OnAxe(InputAction.CallbackContext value)
     {
         activeTool = PlayerTools.Axe;
+        OnChangeTool?.Invoke();
     }
 
     public void OnShovel(InputAction.CallbackContext value)
     {
         activeTool = PlayerTools.Shovel;
+        OnChangeTool?.Invoke();
     }
 
     public void OnBucket(InputAction.CallbackContext value)
     {
         activeTool = PlayerTools.Bucket;
+        OnChangeTool?.Invoke();
     }
 
     #endregion

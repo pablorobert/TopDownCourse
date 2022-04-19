@@ -5098,4 +5098,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 2
+  leafs: {fileID: 199749911}
   drop: {fileID: 6864079280641705693, guid: b8628069a344dfb4583dc3a59e8a125b, type: 3}

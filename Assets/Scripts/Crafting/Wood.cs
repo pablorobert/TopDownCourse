@@ -9,12 +9,6 @@ public class Wood : MonoBehaviour
 
     private float countTime;
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         countTime += Time.deltaTime;
@@ -28,8 +22,12 @@ public class Wood : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            collider.GetComponent<PlayerItems>().AddWood(1);
-            Destroy(gameObject);
+            PlayerItems playerItems = collider.GetComponent<PlayerItems>();
+            if (!playerItems.IsWoodFull())
+            {
+                playerItems.AddWood(1);
+                Destroy(gameObject);
+            }
         }
     }
 }
