@@ -17,6 +17,7 @@ public class PlayerAnimation : MonoBehaviour
     public const string ANIMATOR_ROLLING_TRIGGER = "rolling";
     public const string ANIMATOR_FISHING_TRIGGER = "fishing";
     public const string ANIMATOR_ROLL_NAME = "roll";
+    public const string ANIMATOR_HAMMERING_PROPERTY = "hammering";
 
     private PlayerController playerController;
     private PlayerItems playerItems;
@@ -124,6 +125,12 @@ public class PlayerAnimation : MonoBehaviour
     {
         playerController.IsPaused = false;
         fishing.OnCatch();
+    }
+
+    public void OnHammer(bool started)
+    {
+        playerController.IsPaused = started;
+        anim.SetBool(ANIMATOR_HAMMERING_PROPERTY, started);
     }
 
     #endregion
