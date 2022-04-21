@@ -8,7 +8,8 @@ public enum PlayerTools
 {
     Axe,
     Shovel,
-    Bucket
+    Bucket,
+    Sword
 }
 
 public class PlayerController : MonoBehaviour
@@ -23,9 +24,17 @@ public class PlayerController : MonoBehaviour
         get { return activeTool; }
     }
 
+
     private float originalSpeed;
     private float waterTime;
     private bool decreaseWater;
+
+    [Header("Attack")]
+
+    public Transform swordPosition;
+    public float attackRange;
+
+    public LayerMask enemyLayer;
 
     [Header("Events")]
     public UnityEvent OnChangeTool;
@@ -61,6 +70,10 @@ public class PlayerController : MonoBehaviour
         get; private set;
     }
     public bool IsWatering
+    {
+        get; private set;
+    }
+    public bool IsAttacking
     {
         get; private set;
     }
@@ -183,7 +196,20 @@ public class PlayerController : MonoBehaviour
         IsCutting = activeTool == PlayerTools.Axe ? toolling : false;
         IsDigging = activeTool == PlayerTools.Shovel ? toolling : false;
         IsWatering = activeTool == PlayerTools.Bucket ? toolling : false;
-        //CheckWater();
+        IsAttacking = activeTool == PlayerTools.Sword ? toolling : false;
+    }
+
+    void OnAttack()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(swordPosition.position, attackRange, enemyLayer);
+        if (hit != null)
+        {
+            /*if (hit.TryGetComponent<Skeleton>(out Skeleton enemy))
+            {
+                enemy.OnHit();
+            }*/
+            hit.GetComponent<Skeleton>().OnHit();
+        }
     }
 
     #endregion
@@ -275,5 +301,16 @@ public class PlayerController : MonoBehaviour
         OnChangeTool?.Invoke();
     }
 
+    public void OnSword(InputAction.CallbackContext value)
+    {
+        activeTool = PlayerTools.Sword;
+        OnChangeTool?.Invoke();
+    }
+
     #endregion
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(swordPosition.position, attackRange);
+    }
 }

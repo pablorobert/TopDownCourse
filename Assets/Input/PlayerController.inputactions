@@ -78,6 +78,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Sword",
+                    "type": "Button",
+                    "id": "3341f30d-7241-4133-afbb-1afe909e0426",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Actions",
                     "type": "Button",
                     "id": "b62cccd8-2893-4d72-9e6e-330602316201",
@@ -283,6 +292,17 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "Actions",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d388f6eb-2c26-4ed3-8565-397624202382",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sword",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

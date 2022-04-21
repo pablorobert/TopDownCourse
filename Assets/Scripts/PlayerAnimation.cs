@@ -11,11 +11,12 @@ public class PlayerAnimation : MonoBehaviour
     public const int PLAYER_CUTTING = 3;
     public const int PLAYER_DIGGING = 4;
     public const int PLAYER_WATERING = 5;
-    //public const int PLAYER_ = 6;
+    public const int PLAYER_ATTACKING = 6;
     public const int BASE_LAYER = 0;
     public const string ANIMATOR_PROPERTY = "transition";
     public const string ANIMATOR_ROLLING_TRIGGER = "rolling";
     public const string ANIMATOR_FISHING_TRIGGER = "fishing";
+    public const string ANIMATOR_HIT_TRIGGER = "hurt";
     public const string ANIMATOR_ROLL_NAME = "roll";
     public const string ANIMATOR_HAMMERING_PROPERTY = "hammering";
 
@@ -24,6 +25,10 @@ public class PlayerAnimation : MonoBehaviour
     private Animator anim;
 
     private Fishing fishing;
+
+    private bool isHit;
+    private float timeCount;
+    public float recoveryTime = 1f;
 
     void Awake()
     {
@@ -44,6 +49,9 @@ public class PlayerAnimation : MonoBehaviour
         OnCut();
         OnDig();
         OnWater();
+        OnAttack();
+
+        RecoveryTime();
     }
 
     void OnMove()
@@ -90,6 +98,8 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    #endregion
+
     void OnCut()
     {
         if (playerController.IsCutting)
@@ -133,5 +143,36 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetBool(ANIMATOR_HAMMERING_PROPERTY, started);
     }
 
-    #endregion
+    public void OnAttack()
+    {
+        if (playerController.IsAttacking)
+        {
+            anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_ATTACKING);
+        }
+
+    }
+
+    public void OnHit()
+    {
+        if (!isHit)
+        {
+            isHit = true;
+            anim.SetTrigger(ANIMATOR_HIT_TRIGGER);
+        }
+    }
+
+    void RecoveryTime()
+    {
+        if (isHit)
+        {
+
+            timeCount += Time.deltaTime;
+            if (timeCount >= recoveryTime)
+            {
+                timeCount = 0;
+                isHit = false;
+            }
+        }
+    }
+
 }
