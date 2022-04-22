@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public enum Locales
@@ -46,10 +47,11 @@ public class DialogueController : MonoBehaviour
 
     private Sprite[] actorImages;
 
-
+    private PlayerController playerController;
     void Awake()
     {
         Instance = this;
+        playerController = FindObjectOfType<PlayerController>();
     }
 
     IEnumerator TypeSentence()
@@ -78,6 +80,8 @@ public class DialogueController : MonoBehaviour
         {
             dialogueWindow.SetActive(false);
             IsVisible = false;
+            playerController.IsPaused = false;
+            playerController.GetComponentInChildren<PlayerInput>().actions.Enable();
 
             //informs to listeners the conversation is done
             dialogueSettings.RaiseEvent();
@@ -106,6 +110,8 @@ public class DialogueController : MonoBehaviour
         if (!IsVisible)
         {
             IsVisible = true;
+            playerController.IsPaused = true;
+            playerController.GetComponentInChildren<PlayerInput>().actions.Disable();
 
             this.dialogueSettings = settings;
 

@@ -196,6 +196,8 @@ public class PlayerController : MonoBehaviour
         IsDigging = activeTool == PlayerTools.Shovel ? toolling : false;
         IsWatering = activeTool == PlayerTools.Bucket ? toolling : false;
         IsAttacking = activeTool == PlayerTools.Sword ? toolling : false;
+
+        //check animation in wrong time
     }
 
     void OnAttack()

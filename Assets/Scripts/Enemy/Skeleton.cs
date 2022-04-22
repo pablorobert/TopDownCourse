@@ -8,6 +8,7 @@ public class Skeleton : MonoBehaviour
 {
     public Transform attackPoint;
     public float attackRange;
+    public float detectRadius;
     public LayerMask playerLayer;
 
     public Image lifeBar;
@@ -19,6 +20,8 @@ public class Skeleton : MonoBehaviour
     private PlayerAnimation playerAnim;
     private NavMeshAgent agent;
     private Animator anim;
+
+    private bool isDetectingPlayer;
 
     void Awake()
     {
@@ -38,7 +41,7 @@ public class Skeleton : MonoBehaviour
     void Update()
     {
 
-        if (isDead)
+        if (isDead || !isDetectingPlayer)
             return;
 
         agent.SetDestination(playerController.transform.position);
@@ -85,6 +88,26 @@ public class Skeleton : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        DetectPlayer();
+    }
+
+    public void DetectPlayer()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, detectRadius, playerLayer);
+        if (hit != null)
+        {
+            isDetectingPlayer = true;
+        }
+        else
+        {
+            isDetectingPlayer = false;
+            PlayAnimation(0);
+        }
+
+    }
+
     public void OnHit()
     {
         currentHealth--;
@@ -104,6 +127,14 @@ public class Skeleton : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
+        Color original = Gizmos.color;
+
+        Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectRadius);
+
+        Gizmos.color = original;
     }
 }
