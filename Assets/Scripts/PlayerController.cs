@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
         get { return activeTool; }
     }
 
-
     private float originalSpeed;
     private float waterTime;
     private bool decreaseWater;

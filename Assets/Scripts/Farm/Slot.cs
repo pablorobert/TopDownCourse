@@ -5,6 +5,8 @@ using UnityEngine;
 public class Slot : MonoBehaviour
 {
 
+    private AudioSource audioSource;
+    public AudioClip itemSound;
     private bool isDig;
     public int digAmount;
 
@@ -33,6 +35,7 @@ public class Slot : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         originalDigAmount = digAmount;
     }
 
@@ -43,15 +46,18 @@ public class Slot : MonoBehaviour
         {
             currentWater += 0.01f;
         }
-        if (currentWater >= waterAmount)
+        if (currentWater >= waterAmount && isHoleVisible)
         {
+            audioSource.PlayOneShot(itemSound);
             spriteRenderer.sprite = carrot;
             isCarrotVisible = true;
+            isHoleVisible = false;
         }
         if (isCarrotVisible && isDetectingPlayer && playerController.IsActing &&
         !playerItems.IsCarrotFull())
         {
             //harvest
+            audioSource.PlayOneShot(itemSound);
             spriteRenderer.sprite = hole;
             playerItems.AddCarrot(1);
             isCarrotVisible = false;
