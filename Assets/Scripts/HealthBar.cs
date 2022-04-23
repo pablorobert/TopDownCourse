@@ -15,11 +15,6 @@ public class HealthBar : MonoBehaviour
     public int currentHealth;
     public int maxHealth;
 
-    void Start()
-    {
-        Draw();
-    }
-
     void Update()
     {
         if (currentHealth > maxHealth)
@@ -37,20 +32,18 @@ public class HealthBar : MonoBehaviour
     {
         for (int i = 0; i < images.Count; i++)
         {
-            images[i].sprite = empty;
-        }
-
-        int count = ((int)Mathf.Ceil(currentHealth)) / 2;
-        int diff = currentHealth - (count * 2);
-
-        for (int i = 0; i < count; i++)
-        {
-            images[i].sprite = full;
-        }
-
-        if (diff == 1)
-        {
-            images[count].sprite = half;
+            if (currentHealth > (i * 2 + 1))
+            {
+                images[i].sprite = full;
+            }
+            else if (currentHealth > (i * 2))
+            {
+                images[i].sprite = half;
+            }
+            else
+            {
+                images[i].sprite = empty;
+            }
         }
     }
 }
