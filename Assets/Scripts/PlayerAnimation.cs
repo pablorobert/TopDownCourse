@@ -92,10 +92,6 @@ public class PlayerAnimation : MonoBehaviour
         {
             anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_RUNNING);
         }
-        else
-        {
-            anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_IDLE);
-        }
     }
 
     #endregion
@@ -118,7 +114,6 @@ public class PlayerAnimation : MonoBehaviour
 
     void OnWater()
     {
-        //print(playerController.IsWatering);
         if (playerController.IsWatering && playerItems.currentWater > 0)
         {
             anim.SetInteger(ANIMATOR_PROPERTY, PLAYER_WATERING);

@@ -196,8 +196,6 @@ public class PlayerController : MonoBehaviour
         IsDigging = activeTool == PlayerTools.Shovel ? toolling : false;
         IsWatering = activeTool == PlayerTools.Bucket ? toolling : false;
         IsAttacking = activeTool == PlayerTools.Sword ? toolling : false;
-
-        //check animation in wrong time
     }
 
     void OnAttack()
@@ -286,24 +284,28 @@ public class PlayerController : MonoBehaviour
 
     public void OnAxe(InputAction.CallbackContext value)
     {
+        if (IsDigging || IsWatering || IsAttacking) return;
         activeTool = PlayerTools.Axe;
         OnChangeTool?.Invoke();
     }
 
     public void OnShovel(InputAction.CallbackContext value)
     {
+        if (IsCutting || IsWatering || IsAttacking) return;
         activeTool = PlayerTools.Shovel;
         OnChangeTool?.Invoke();
     }
 
     public void OnBucket(InputAction.CallbackContext value)
     {
+        if (IsCutting || IsDigging || IsAttacking) return;
         activeTool = PlayerTools.Bucket;
         OnChangeTool?.Invoke();
     }
 
     public void OnSword(InputAction.CallbackContext value)
     {
+        if (IsCutting || IsDigging || IsWatering) return;
         activeTool = PlayerTools.Sword;
         OnChangeTool?.Invoke();
     }
