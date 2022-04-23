@@ -14,6 +14,25 @@ public enum PlayerTools
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Health")]
+    [SerializeField]
+    private int maxHealth;
+    public int MaxHealth
+    {
+        get { return maxHealth; }
+    }
+
+    [SerializeField]
+    private int currentHealth;
+
+    public int CurrentHealth
+    {
+        get { return currentHealth; }
+    }
+
+    private bool criticalDamage;
+
+    [Header("Speed")]
     [SerializeField] private float speed;
     [SerializeField] private float runSpeed;
 
@@ -41,6 +60,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rig;
     private PlayerItems playerItems;
     private Vector2 direction;
+
+    private SpriteRenderer spriteRenderer;
 
     public bool IsPaused
     {
@@ -92,8 +113,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         originalSpeed = speed;
+        currentHealth = maxHealth;
         rig = GetComponent<Rigidbody2D>();
         playerItems = GetComponent<PlayerItems>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         OnChangeTool?.Invoke();
     }
 
@@ -107,6 +130,8 @@ public class PlayerController : MonoBehaviour
         if (mouse.rightButton.wasPressedThisFrame) {
 
         }*/
+
+        CriticalDamage();
         if (IsPaused) return;
 
         CheckWater();
@@ -116,6 +141,39 @@ public class PlayerController : MonoBehaviour
         if (IsPaused) return;
 
         OnMove();
+    }
+
+    void CriticalDamage()
+    {
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+        if (CurrentHealth < 3)
+        {
+            criticalDamage = true;
+        }
+        else
+        {
+            criticalDamage = false;
+        }
+
+        if (criticalDamage)
+        {
+            spriteRenderer.color = Color.Lerp(
+                Color.white,
+                Color.red,
+                Mathf.PingPong(8 * Time.time, 0.5f)
+            );
+        }
+        else
+        {
+            spriteRenderer.color = Color.white;
+        }
     }
 
     void CheckWater()

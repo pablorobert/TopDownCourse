@@ -12,19 +12,20 @@ public class HealthBar : MonoBehaviour
 
     public Sprite full;
 
-    public int currentHealth;
-    public int maxHealth;
+    private int currentHealth;
+    private int maxHealth;
+
+    private PlayerController player;
+
+    void Awake()
+    {
+        player = FindObjectOfType<PlayerController>();
+    }
 
     void Update()
     {
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-        if (currentHealth < 0)
-        {
-            currentHealth = 0;
-        }
+        currentHealth = player.CurrentHealth;
+        maxHealth = player.MaxHealth;
         Draw();
     }
 

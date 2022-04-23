@@ -160,6 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b359aa348774e2c44ba5afdcbb2488c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 10
+  currentHealth: 0
   speed: 5
   runSpeed: 10
   swordPosition: {fileID: 1144607379}
@@ -242,7 +244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.22, y: -3.75, z: 0}
+  m_LocalPosition: {x: 3.73, y: -13.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -862,8 +864,6 @@ MonoBehaviour:
   empty: {fileID: 1058886130, guid: e2f894d55fe07f943a4f3a1bd8ecbfc8, type: 3}
   half: {fileID: -1110117260, guid: e2f894d55fe07f943a4f3a1bd8ecbfc8, type: 3}
   full: {fileID: 965767110, guid: e2f894d55fe07f943a4f3a1bd8ecbfc8, type: 3}
-  currentHealth: 7
-  maxHealth: 10
 --- !u!1 &137547742
 GameObject:
   m_ObjectHideFlags: 0
