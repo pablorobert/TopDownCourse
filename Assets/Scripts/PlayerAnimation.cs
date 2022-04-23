@@ -86,7 +86,7 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    void OnRun()
+    public void OnRun()
     {
         if (playerController.IsRunning)
         {

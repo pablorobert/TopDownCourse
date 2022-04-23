@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     public bool IsRunning
     {
-        get; private set;
+        get; set;
     }
 
     public bool IsRolling
@@ -196,6 +196,25 @@ public class PlayerController : MonoBehaviour
             {
                 IsWatering = false; //we dont have water
             }
+        }
+    }
+
+    public void MoveToPosition(Vector2 pos)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, pos, speed * Time.deltaTime);
+    }
+
+    public void FaceGameObject(Transform t)
+    {
+        float relativePos = t.position.x - transform.position.x;
+
+        if (relativePos > 0)
+        {
+            Flip(false); // false = right 
+        }
+        else
+        {
+            Flip(true); // true = left
         }
     }
 
@@ -373,5 +392,17 @@ public class PlayerController : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(swordPosition.position, attackRange);
+    }
+
+    public void Flip(bool left)
+    {
+        if (left)
+        {
+            transform.eulerAngles = new Vector2(0, 180f);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector2(0, 0);
+        }
     }
 }

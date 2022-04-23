@@ -24,7 +24,9 @@ public class House : MonoBehaviour
 
     private bool isBuilt;
 
-    private bool started;
+    private bool isStarted;
+
+    private bool isAnimating;
 
     void Awake()
     {
@@ -37,19 +39,16 @@ public class House : MonoBehaviour
     {
         if (isBuilt)
             return;
-        if (isDetectingPlayer && playerController.IsActing && !started
-        && playerItems.currentWood >= woodAmount)
+        if (isDetectingPlayer && playerController.IsActing && !isStarted
+        && playerItems.currentWood >= woodAmount && !isAnimating)
         {
-            houseSprite.gameObject.SetActive(true);
+            isAnimating = true;
             playerItems.currentWood -= woodAmount;
-            playerController.transform.position = buildingPoint.position;
-            playerController.IsActing = false;
-            started = true;
-            playerAnimation.OnHammer(started);
-            houseSprite.color = inactiveColor;
+
+            StartCoroutine(BuildHouse());
         }
 
-        if (started)
+        if (isStarted)
         {
             timeCount += Time.deltaTime;
             if (timeCount > timeAmount)
@@ -61,7 +60,6 @@ public class House : MonoBehaviour
             }
         }
     }
-
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -77,5 +75,30 @@ public class House : MonoBehaviour
         {
             isDetectingPlayer = false;
         }
+    }
+
+    IEnumerator BuildHouse()
+    {
+        playerController.IsRunning = true;
+        playerAnimation.OnRun();
+        //look at the point
+        playerController.FaceGameObject(buildingPoint.transform);
+
+        while (Vector2.Distance(playerController.transform.position, buildingPoint.position) > 0.1f)
+        {
+            playerController.MoveToPosition(buildingPoint.position);
+            yield return new WaitForSeconds(0.01f);
+        }
+        playerController.IsRunning = false;
+        playerController.IsActing = false;
+        //look at the house
+        playerController.FaceGameObject(transform);
+        //playerController.transform.position = buildingPoint.position;
+
+        playerAnimation.OnHammer(true);
+        houseSprite.gameObject.SetActive(true);
+        isStarted = true;
+        houseSprite.color = inactiveColor;
+
     }
 }
