@@ -2,19 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum NPCType
+{
+    BowlHair,
+    LongHair,
+    CurlyHair,
+    MopHair,
+    ShortHair,
+    SpikeHair
+}
+
+//TO-DO split appearance and movement
 public class NPC : MonoBehaviour
 {
+    [Header("Hair")]
+    public bool randomHair;
+    public NPCType hairType;
+
+    public List<AnimatorOverrideController> npcAnimators
+    = new List<AnimatorOverrideController>();
+
     public const string ANIMATOR_NPC_ISWALKING = "isWalking";
-    public bool randomWalk;
+
+    [Header("Movement")]
     public float speed;
     private float originalSpeed;
+    public bool randomWalk;
     public List<Transform> paths = new List<Transform>();
     private PlayerController player;
     private bool isLookingLeft;
     private int currentIndex;
-
-    public List<AnimatorOverrideController> npcAnimators
-        = new List<AnimatorOverrideController>();
 
     private Animator anim;
 
@@ -23,8 +40,15 @@ public class NPC : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
         anim = GetComponent<Animator>();
 
-        int npcRandom = Random.Range(0, npcAnimators.Count);
-        anim.runtimeAnimatorController = npcAnimators[npcRandom];
+        if (randomHair)
+        {
+            int npcRandom = Random.Range(0, npcAnimators.Count);
+            anim.runtimeAnimatorController = npcAnimators[npcRandom];
+        }
+        else
+        {
+            anim.runtimeAnimatorController = npcAnimators[(int)hairType];
+        }
     }
 
     void Start()
