@@ -13,12 +13,18 @@ public class NPC : MonoBehaviour
     private bool isLookingLeft;
     private int currentIndex;
 
+    public List<AnimatorOverrideController> npcAnimators
+        = new List<AnimatorOverrideController>();
+
     private Animator anim;
 
     void Awake()
     {
         player = FindObjectOfType<PlayerController>();
         anim = GetComponent<Animator>();
+
+        int npcRandom = Random.Range(0, npcAnimators.Count);
+        anim.runtimeAnimatorController = npcAnimators[npcRandom];
     }
 
     void Start()
