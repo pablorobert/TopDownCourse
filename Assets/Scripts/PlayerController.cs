@@ -145,15 +145,8 @@ public class PlayerController : MonoBehaviour
 
     void CriticalDamage()
     {
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-        if (currentHealth < 0)
-        {
-            currentHealth = 0;
-        }
-        if (CurrentHealth < 3)
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        if (currentHealth < 3)
         {
             criticalDamage = true;
         }
