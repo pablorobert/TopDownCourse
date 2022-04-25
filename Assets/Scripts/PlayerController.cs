@@ -28,8 +28,6 @@ public class PlayerController : MonoBehaviour
         get; private set;
     }
 
-    //[SerializeField]
-    //private int currentHealth;
     [field: SerializeField]
     public int CurrentHealth
     {

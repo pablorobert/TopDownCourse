@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Dialogue : MonoBehaviour
 {
+    [Header("Dialogue")]
     public float dialogueRange;
 
     public LayerMask playerMask;
@@ -20,10 +21,22 @@ public class Dialogue : MonoBehaviour
 
     private NPC npc;
 
+    [Header("Quest")]
+    public bool hasQuest;
+    private NPCQuest npcQuest;
+    private DialogueSettings settings;
+
+    public DialogueSettings dialogueBetweenQuest;
+    public DialogueSettings dialogueAfterQuest;
+
     void Awake()
     {
         player = FindObjectOfType<PlayerController>();
         npc = GetComponent<NPC>();
+        if (hasQuest)
+        {
+            npcQuest = GetComponent<NPCQuest>();
+        }
     }
 
     void Start()
@@ -33,6 +46,17 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
+        if (hasQuest && npcQuest.isActive &&
+            GameManager.Instance.QuestManager.quests[npcQuest.questIndex].isCompleted)
+        {
+
+            if (dialogueAfterQuest != null)
+            {
+                dialogue = dialogueAfterQuest;
+                GetDialogueInfo();
+            }
+        }
+
         if (isPlayerDetected && player.IsSpeaking)
         {
             DialogueController.Instance.Speak(
@@ -42,6 +66,8 @@ public class Dialogue : MonoBehaviour
                 dialogue
             );
         }
+
+
     }
 
     void FixedUpdate()
@@ -95,6 +121,36 @@ public class Dialogue : MonoBehaviour
         {
             isPlayerDetected = false;
         }
+    }
+
+    public void OnEnable()
+    {
+        if (hasQuest)
+        {
+            dialogue.OnComplete += OnCompleteDialogue;
+        }
+    }
+
+    public void OnDisable()
+    {
+        if (hasQuest)
+        {
+            dialogue.OnComplete -= OnCompleteDialogue;
+        }
+    }
+
+    public void OnCompleteDialogue()
+    {
+        if (!npcQuest.isActive)
+        {
+            npcQuest.StartQuest();
+            if (dialogueBetweenQuest != null)
+            {
+                dialogue = dialogueBetweenQuest;
+                GetDialogueInfo();
+            }
+        }
+        print("complete");
     }
 
     void OnDrawGizmosSelected()
