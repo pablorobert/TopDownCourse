@@ -14,20 +14,26 @@ public enum PlayerTools
 
 public class PlayerController : MonoBehaviour
 {
+
     [Header("Health")]
-    [SerializeField]
-    private int maxHealth;
+
+    [Tooltip("The amount of health to enable critical damage")]
+    public int criticalDamageHealth = 3;
+
+    [field: SerializeField]
+    //[field: Range(min: 0, max: 10)]
+    [field: Tooltip("Max Player Health")]
     public int MaxHealth
     {
-        get { return maxHealth; }
+        get; private set;
     }
 
-    [SerializeField]
-    private int currentHealth;
-
+    //[SerializeField]
+    //private int currentHealth;
+    [field: SerializeField]
     public int CurrentHealth
     {
-        get { return currentHealth; }
+        get; private set;
     }
 
     private bool criticalDamage;
@@ -113,7 +119,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         originalSpeed = speed;
-        currentHealth = maxHealth;
+        CurrentHealth = MaxHealth;
         rig = GetComponent<Rigidbody2D>();
         playerItems = GetComponent<PlayerItems>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -145,8 +151,8 @@ public class PlayerController : MonoBehaviour
 
     void CriticalDamage()
     {
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        if (currentHealth < 3)
+        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+        if (CurrentHealth < criticalDamageHealth)
         {
             criticalDamage = true;
         }

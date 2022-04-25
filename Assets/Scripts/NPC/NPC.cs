@@ -4,12 +4,12 @@ using UnityEngine;
 
 public enum NPCType
 {
-    BowlHair,
-    LongHair,
-    CurlyHair,
-    MopHair,
-    ShortHair,
-    SpikeHair
+    [InspectorName("Bowl")] BowlHair,
+    [InspectorName("Long")] LongHair,
+    [InspectorName("Curly")] CurlyHair,
+    [InspectorName("Mop")] MopHair,
+    [InspectorName("Short")] ShortHair,
+    [InspectorName("Spike")] SpikeHair
 }
 
 //TO-DO split appearance and movement
