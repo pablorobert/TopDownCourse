@@ -94,5 +94,4 @@ public class PlayerItems : MonoBehaviour
         return (float)fishes / (float)maxFishes;
     }
 
-
 }
