@@ -17,6 +17,12 @@ public class DestroyAfterDialog : MonoBehaviour
 
     public void Kill()
     {
+        StartCoroutine(DestroyCoroutine());
+    }
+
+    IEnumerator DestroyCoroutine()
+    {
+        yield return new WaitForSeconds(timeToDestroy);
         //destroy this one
         gameObject.SetActive(false);
         Destroy(gameObject, timeToDestroy);

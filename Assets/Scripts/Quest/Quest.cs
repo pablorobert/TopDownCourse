@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class Quest : MonoBehaviour
 {
     public int index;
+
+    public bool isActive;
     public bool isCompleted;
 
     [TextArea] public string description;

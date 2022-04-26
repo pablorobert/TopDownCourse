@@ -16,7 +16,6 @@ public class QuestCollect2Carrots : Quest
 
         if (playerItems.carrots >= 2)
         {
-            print("Quest 2 carrots concluída");
             isCompleted = true;
             OnComplete();
         }

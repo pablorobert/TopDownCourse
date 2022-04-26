@@ -31,7 +31,7 @@ public class NPC : MonoBehaviour
     public List<Transform> paths = new List<Transform>();
     private PlayerController player;
     private bool isLookingLeft;
-    private int currentIndex;
+    [SerializeField] private int currentIndex;
 
     private Animator anim;
 
@@ -80,6 +80,8 @@ public class NPC : MonoBehaviour
 
     private void Walk()
     {
+        if (paths.Count == 0)
+            return;
         transform.position = Vector2.MoveTowards(
             transform.position,
             paths[currentIndex].position,

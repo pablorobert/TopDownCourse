@@ -15,7 +15,6 @@ public class QuestCollect1Fish : Quest
 
         if (playerItems.fishes >= 1)
         {
-            print("Quest " + description + " concluída");
             isCompleted = true;
             OnComplete();
         }
