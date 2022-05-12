@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Dialogue : MonoBehaviour
@@ -15,10 +13,6 @@ public class Dialogue : MonoBehaviour
 
     private PlayerController player;
 
-    private List<string> sentences = new List<string>();
-    private List<string> actorNames = new List<string>();
-    private List<Sprite> actorImages = new List<Sprite>();
-
     private NPC npc;
 
     [Header("Quest")]
@@ -31,7 +25,6 @@ public class Dialogue : MonoBehaviour
 
     void Awake()
     {
-        player = FindObjectOfType<PlayerController>();
         npc = GetComponent<NPC>();
         if (hasQuest)
         {
@@ -41,7 +34,7 @@ public class Dialogue : MonoBehaviour
 
     void Start()
     {
-        GetDialogueInfo();
+        player = GameManager.Instance.GetPlayer();
     }
 
     void Update()
@@ -53,53 +46,18 @@ public class Dialogue : MonoBehaviour
             if (dialogueAfterQuest != null)
             {
                 dialogue = dialogueAfterQuest;
-                GetDialogueInfo();
             }
         }
 
         if (isPlayerDetected && player.IsSpeaking)
         {
-            DialogueController.Instance.Speak(
-                sentences.ToArray(),
-                actorNames.ToArray(),
-                actorImages.ToArray(),
-                dialogue
-            );
+            DialogueController.Instance.Speak(dialogue);
         }
-
-
     }
 
     void FixedUpdate()
     {
         ShowDialog();
-    }
-
-    public void GetDialogueInfo()
-    {
-
-        sentences.Clear();
-        actorNames.Clear();
-        actorImages.Clear();
-
-        for (int i = 0; i < dialogue.sentences.Count; i++)
-        {
-            switch (DialogueController.Instance.locale)
-            {
-                case Locales.pt_BR:
-                    sentences.Add(dialogue.sentences[i].sentence.portuguese);
-                    break;
-                case Locales.en_US:
-                    sentences.Add(dialogue.sentences[i].sentence.english);
-                    break;
-                case Locales.es_ES:
-                    sentences.Add(dialogue.sentences[i].sentence.spanish);
-                    break;
-            }
-
-            actorNames.Add(dialogue.sentences[i].actorName);
-            actorImages.Add(dialogue.sentences[i].actorImage);
-        }
     }
 
     void Speak()
@@ -147,10 +105,9 @@ public class Dialogue : MonoBehaviour
             if (dialogueBetweenQuest != null)
             {
                 dialogue = dialogueBetweenQuest;
-                GetDialogueInfo();
+                //GetDialogueInfo();
             }
         }
-        print("complete");
     }
 
     void OnDrawGizmosSelected()

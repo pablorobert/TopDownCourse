@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -41,17 +40,18 @@ public class DialogueController : MonoBehaviour
 
     private int currentIndex;
 
-    private string[] sentences;
-
-    private string[] actorNames;
-
-    private Sprite[] actorImages;
+    private WaitForSeconds waitForSeconds;
 
     private PlayerController playerController;
     void Awake()
     {
         Instance = this;
-        playerController = FindObjectOfType<PlayerController>();
+    }
+
+    void Start()
+    {
+        playerController = GameManager.Instance.GetPlayer();
+        waitForSeconds = new WaitForSeconds(typingSpeed);
     }
 
     IEnumerator TypeSentence()
@@ -59,81 +59,99 @@ public class DialogueController : MonoBehaviour
         speechText.text = "";
         nextSentenceButton.gameObject.SetActive(false);
         nextSentenceText.text = ">>";
-        if (currentIndex == sentences.Length - 1)
+        if (currentIndex == dialogueSettings.sentences.Count - 1)
         {
             nextSentenceText.text = "End";
         }
 
-        foreach (char letter in sentences[currentIndex].ToCharArray())
+        string sentence = GetSentence(currentIndex);
+        foreach (char letter in sentence.ToCharArray())
         {
             speechText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            yield return waitForSeconds;
         }
         nextSentenceButton.gameObject.SetActive(true);
     }
 
     public void NextSentence()
     {
+        string actorName;
+        Sprite actorImage;
         int lastIndex = currentIndex;
         currentIndex++;
-        if (currentIndex == sentences.Length) //out of sentences
+        if (currentIndex == dialogueSettings.sentences.Count) //out of sentences
         {
             dialogueWindow.SetActive(false);
             IsVisible = false;
             playerController.IsPaused = false;
             playerController.GetComponentInChildren<PlayerInput>().actions.Enable();
 
-            //informs to listeners the conversation is done
+            //conversation is done, warn listeners
             dialogueSettings.RaiseEvent();
 
             return;
         }
-        if (lastIndex < sentences.Length - 1 &&
-        sentences[lastIndex] == speechText.text)
+        if (lastIndex < dialogueSettings.sentences.Count - 1 &&
+        GetSentence(lastIndex) == speechText.text)
         {
             speechText.text = "";
-            if (actorNames[currentIndex] != null && actorNames[currentIndex] != "")
+            actorName = dialogueSettings.sentences[currentIndex].actorName;
+            actorImage = dialogueSettings.sentences[currentIndex].actorImage;
+
+            if (actorName != null && actorName != "")
             {
-                actorNameText.text = actorNames[currentIndex];
+                actorNameText.text = actorName;
             }
-            if (actorImages[currentIndex] != null)
+            if (actorImage != null)
             {
-                profileImage.sprite = actorImages[currentIndex];
+                profileImage.sprite = actorImage;
             }
             StartCoroutine(TypeSentence());
         }
-
     }
 
-    public void Speak(string[] sentences, string[] actorNames, Sprite[] actorImages, DialogueSettings settings)
+    public string GetSentence(int index)
+    {
+        switch (DialogueController.Instance.locale)
+        {
+            case Locales.pt_BR:
+                return dialogueSettings.sentences[index].sentence.portuguese;
+            case Locales.en_US:
+                return dialogueSettings.sentences[index].sentence.english;
+            case Locales.es_ES:
+                return dialogueSettings.sentences[index].sentence.spanish;
+        }
+        return ""; //should not be here 
+    }
+
+    public void Speak(DialogueSettings settings)
     {
         if (!IsVisible)
         {
             IsVisible = true;
-            playerController.IsPaused = true;
-            playerController.GetComponentInChildren<PlayerInput>().actions.Disable();
-
             this.dialogueSettings = settings;
 
-            this.sentences = sentences;
-            this.actorNames = actorNames;
-            this.actorImages = actorImages;
+            playerController.IsPaused = true;
+            playerController.GetComponentInChildren<PlayerInput>().actions.Disable();
 
             currentIndex = 0;
 
             speechText.text = "";
-            if (actorNames[currentIndex] != null)
+            string actorName = dialogueSettings.sentences[currentIndex].actorName;
+            Sprite actorImage = dialogueSettings.sentences[currentIndex].actorImage;
+
+            if (actorName != null)
             {
-                actorNameText.text = actorNames[currentIndex];
+                actorNameText.text = actorName;
             }
             else
             {
                 actorNameText.text = "";
             }
-            if (actorImages[currentIndex] != null)
+            if (actorImage != null)
             {
                 profileImage.gameObject.SetActive(true);
-                profileImage.sprite = actorImages[currentIndex];
+                profileImage.sprite = actorImage;
             }
             else
             {
@@ -143,7 +161,6 @@ public class DialogueController : MonoBehaviour
             dialogueWindow.SetActive(true);
 
             StartCoroutine(TypeSentence());
-
         }
     }
 }

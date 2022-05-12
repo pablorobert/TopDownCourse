@@ -14,8 +14,6 @@ public class ChangeToNewDialogue : MonoBehaviour
         //Get the npc
         Dialogue dialogue = NPC.GetComponent<Dialogue>();
         dialogue.dialogue = newDialogue;
-        dialogue.GetDialogueInfo();
-
     }
 
     public void OnEnable()

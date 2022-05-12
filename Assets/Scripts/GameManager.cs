@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; //singleton and dont destroy
 
+    public PlayerController player = null;
+
     public QuestManager questManager;
 
     public QuestManager QuestManager
@@ -24,15 +26,15 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
-    void Start()
+    public PlayerController GetPlayer()
     {
-
+        if (player == null)
+        {
+            player = FindObjectOfType<PlayerController>();
+        }
+        return player;
     }
 
-    void Update()
-    {
 
-    }
 }
