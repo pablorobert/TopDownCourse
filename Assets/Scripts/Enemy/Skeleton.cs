@@ -10,9 +10,8 @@ public class Skeleton : MonoBehaviour
     public float attackRange;
     public float detectRadius;
     public LayerMask playerLayer;
-
     public Image lifeBar;
-
+    public CanvasGroup canvasGroup;
     [SerializeField] private int currentHealth;
     public int maxHealth = 10;
     private bool isDead;
@@ -35,6 +34,7 @@ public class Skeleton : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         currentHealth = maxHealth;
+        canvasGroup.alpha = 0;
     }
 
     // Update is called once per frame
@@ -111,6 +111,8 @@ public class Skeleton : MonoBehaviour
     public void OnHit()
     {
         currentHealth--;
+        canvasGroup.alpha = 1;
+        Invoke("HideLifeBar", 2f);
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -125,6 +127,10 @@ public class Skeleton : MonoBehaviour
         lifeBar.fillAmount = (float)currentHealth / (float)maxHealth;
     }
 
+    void HideLifeBar()
+    {
+        canvasGroup.alpha = 0;
+    }
     void OnDrawGizmosSelected()
     {
         Color original = Gizmos.color;
