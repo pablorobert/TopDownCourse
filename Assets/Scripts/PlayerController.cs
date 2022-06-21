@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using UnityEngine.Assertions;
 
 public enum PlayerTools
 {
@@ -122,6 +123,8 @@ public class PlayerController : MonoBehaviour
         playerItems = GetComponent<PlayerItems>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         OnChangeTool?.Invoke();
+
+        Assert.AreNotEqual(0, MaxHealth, "Max Health can't be zero");
     }
 
     void Update()

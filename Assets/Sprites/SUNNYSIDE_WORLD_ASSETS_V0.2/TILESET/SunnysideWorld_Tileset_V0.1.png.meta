@@ -3053,7 +3053,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -3123,6 +3123,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -12029,7 +12041,6 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SunnysideWorld_Tileset_V0.1_391: 5537375226390068226
       SunnysideWorld_Tileset_V0.1_244: 3156053366594296370
       SunnysideWorld_Tileset_V0.1_87: -3601000154432620075
       SunnysideWorld_Tileset_V0.1_288: -3277640745831013210
@@ -12122,8 +12133,8 @@ TextureImporter:
       SunnysideWorld_Tileset_V0.1_17: -7404301496137845619
       SunnysideWorld_Tileset_V0.1_361: -3701567791606048716
       SunnysideWorld_Tileset_V0.1_185: 8992360193843801628
-      SunnysideWorld_Tileset_V0.1_111: 6733499129182124225
       SunnysideWorld_Tileset_V0.1_382: -3617458397491389993
+      SunnysideWorld_Tileset_V0.1_111: 6733499129182124225
       SunnysideWorld_Tileset_V0.1_162: 7588717557682256413
       SunnysideWorld_Tileset_V0.1_274: 2953509294261288421
       SunnysideWorld_Tileset_V0.1_225: -918926150502846158
@@ -12169,11 +12180,11 @@ TextureImporter:
       SunnysideWorld_Tileset_V0.1_127: -2974443724959684620
       SunnysideWorld_Tileset_V0.1_108: 7620053405827912547
       SunnysideWorld_Tileset_V0.1_205: -7651496673509774661
-      SunnysideWorld_Tileset_V0.1_221: -7511194069843143074
       SunnysideWorld_Tileset_V0.1_236: 4128757905112801200
       SunnysideWorld_Tileset_V0.1_285: 8655019460762026625
       SunnysideWorld_Tileset_V0.1_304: 3242261366640062703
       SunnysideWorld_Tileset_V0.1_289: 1895823128565034791
+      SunnysideWorld_Tileset_V0.1_221: -7511194069843143074
       SunnysideWorld_Tileset_V0.1_116: -3535060888106490649
       SunnysideWorld_Tileset_V0.1_68: 5833365401359291304
       SunnysideWorld_Tileset_V0.1_311: -1557803998382318355
@@ -12226,11 +12237,11 @@ TextureImporter:
       SunnysideWorld_Tileset_V0.1_109: 4072519829893184680
       SunnysideWorld_Tileset_V0.1_113: 4088200806617800493
       SunnysideWorld_Tileset_V0.1_170: -8876116996250897241
+      SunnysideWorld_Tileset_V0.1_49: 331582270270235581
       SunnysideWorld_Tileset_V0.1_233: 4557578586913279775
       SunnysideWorld_Tileset_V0.1_230: -8277604532782166066
-      SunnysideWorld_Tileset_V0.1_62: -3950897040525288366
-      SunnysideWorld_Tileset_V0.1_49: 331582270270235581
       SunnysideWorld_Tileset_V0.1_168: -2363102770439273127
+      SunnysideWorld_Tileset_V0.1_62: -3950897040525288366
       SunnysideWorld_Tileset_V0.1_408: 6920838087565168823
       SunnysideWorld_Tileset_V0.1_218: -2511601714012542765
       SunnysideWorld_Tileset_V0.1_209: -6615462095018018170
@@ -12258,9 +12269,9 @@ TextureImporter:
       SunnysideWorld_Tileset_V0.1_32: -6726923103650734327
       SunnysideWorld_Tileset_V0.1_181: -6629614815969132131
       SunnysideWorld_Tileset_V0.1_117: -4659787070400776628
-      SunnysideWorld_Tileset_V0.1_140: -809310673785238805
-      SunnysideWorld_Tileset_V0.1_299: -4024120735716381249
       SunnysideWorld_Tileset_V0.1_308: 2861051315454269653
+      SunnysideWorld_Tileset_V0.1_299: -4024120735716381249
+      SunnysideWorld_Tileset_V0.1_140: -809310673785238805
       SunnysideWorld_Tileset_V0.1_264: -4341097464162083784
       SunnysideWorld_Tileset_V0.1_362: 4954277708253198203
       SunnysideWorld_Tileset_V0.1_332: 7107776251233559849
@@ -12352,8 +12363,8 @@ TextureImporter:
       SunnysideWorld_Tileset_V0.1_201: -3464860847833196396
       SunnysideWorld_Tileset_V0.1_104: 2132632493538424827
       SunnysideWorld_Tileset_V0.1_141: 2007687416725112228
-      SunnysideWorld_Tileset_V0.1_167: -6429998797067016100
       SunnysideWorld_Tileset_V0.1_337: 8394822207670782597
+      SunnysideWorld_Tileset_V0.1_167: -6429998797067016100
       SunnysideWorld_Tileset_V0.1_392: -1186866171516033688
       SunnysideWorld_Tileset_V0.1_339: -1577790776178397962
       SunnysideWorld_Tileset_V0.1_195: 4349830746821679258
@@ -12364,8 +12375,8 @@ TextureImporter:
       SunnysideWorld_Tileset_V0.1_148: 9000329158057621779
       SunnysideWorld_Tileset_V0.1_366: 7952968892510235345
       SunnysideWorld_Tileset_V0.1_102: -6018776184288221811
-      SunnysideWorld_Tileset_V0.1_125: 7196393662886665847
       SunnysideWorld_Tileset_V0.1_331: 1490526116862666764
+      SunnysideWorld_Tileset_V0.1_125: 7196393662886665847
       SunnysideWorld_Tileset_V0.1_243: 632490331974036724
       SunnysideWorld_Tileset_V0.1_298: 2916468728049825485
       SunnysideWorld_Tileset_V0.1_409: 403264461337023384
@@ -12445,8 +12456,9 @@ TextureImporter:
       SunnysideWorld_Tileset_V0.1_330: -5245914575297028672
       SunnysideWorld_Tileset_V0.1_45: -3478798325191866620
       SunnysideWorld_Tileset_V0.1_333: 2959462557836931967
-      SunnysideWorld_Tileset_V0.1_106: 4082839327777956268
+      SunnysideWorld_Tileset_V0.1_391: 5537375226390068226
       SunnysideWorld_Tileset_V0.1_349: -2132750521237581493
+      SunnysideWorld_Tileset_V0.1_106: 4082839327777956268
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
         get { return questManager; }
     }
 
+    //public Sprite[] recipeSprites;
+    public Sprite transparentSprite;
+    public Item[] recipeItems;
+
     void Awake()
     {
         if (Instance == null)
