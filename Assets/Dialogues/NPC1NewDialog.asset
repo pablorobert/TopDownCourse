@@ -20,11 +20,11 @@ MonoBehaviour:
     actorImage: {fileID: 0}
     sentence:
       portuguese: Agora eu mudei de fala
-      english: 
+      english: Now i change my speech
       spanish: 
   - actorName: 
     actorImage: {fileID: 0}
     sentence:
       portuguese: Percebeu?
-      english: 
+      english: Did you notice?
       spanish: 

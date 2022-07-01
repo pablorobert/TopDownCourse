@@ -35,7 +35,7 @@ public class Recipe : ScriptableObject
         return null;
     }
 
-    public Item getItem(int x)
+    public Item GetItem(int x)
     {
         //return items[x * 3 + y];
         /*if (x == 0) return item_00;
@@ -72,22 +72,12 @@ public class Recipe : ScriptableObject
         foreach (Item item in items)
         {
             index++;
-            /*Debug.Log(index);
-            Debug.Log(item);
-            Debug.Log(getItem(index));*/
-
-            /*if (item == null && getItem(index) != null)
+            if (item != GetItem(index))
             {
-                Debug.Log("Falhou");
-                return false;
-            }*/
-            if (item != getItem(index))
-            {
-                //Debug.Log("Failed");
                 return false;
             }
         }
-        Debug.Log("Sucess");
+        Debug.Log("Success");
         return true;
     }
 
