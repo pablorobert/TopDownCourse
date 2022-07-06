@@ -33,12 +33,10 @@ public class RecipePanel : MonoBehaviour
         Item outcome = null;
         foreach (Recipe recipe in recipes)
         {
-            //Debug.Log("Checando");
             if (recipe.Check(recipeItems))
             {
                 cooked = true;
                 outcome = recipe.outcome;
-                //Debug.Log("You got " + recipe.outcome.itemName);
             }
         }
         if (cooked)

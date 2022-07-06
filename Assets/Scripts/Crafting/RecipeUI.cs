@@ -19,9 +19,7 @@ public class RecipeUI : MonoBehaviour, IPointerDownHandler
 
     void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
     {
-        //Debug.Log("muda o tipo em sequencia");
         currentIndex = (currentIndex + 1) % GameManager.Instance.recipeItems.Length;
-        //Debug.Log(currentIndex);
         ChangeItem(currentIndex);
     }
 

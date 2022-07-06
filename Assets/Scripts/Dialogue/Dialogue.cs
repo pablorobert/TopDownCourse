@@ -9,6 +9,9 @@ public class Dialogue : MonoBehaviour
 
     private bool isPlayerDetected;
 
+    public bool IsPlayerDetected { get => isPlayerDetected; }
+    //public bool IsPlayerDetected => isPlayerDetected;
+
     public DialogueSettings dialogue;
 
     private PlayerController player;

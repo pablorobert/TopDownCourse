@@ -33,12 +33,15 @@ public class NPC : MonoBehaviour
     private bool isLookingLeft;
     [SerializeField] private int currentIndex;
 
+    private Dialogue dialogue;
+
     private Animator anim;
 
     void Awake()
     {
         player = FindObjectOfType<PlayerController>();
         anim = GetComponent<Animator>();
+        dialogue = GetComponent<Dialogue>();
 
         if (randomHair)
         {
@@ -65,7 +68,8 @@ public class NPC : MonoBehaviour
 
     private void ShouldWalk()
     {
-        if (DialogueController.Instance.IsVisible)
+        if (DialogueController.Instance.IsVisible
+            && (dialogue != null && dialogue.IsPlayerDetected))
         {
             speed = 0;
             anim.SetBool(ANIMATOR_NPC_ISWALKING, false);
