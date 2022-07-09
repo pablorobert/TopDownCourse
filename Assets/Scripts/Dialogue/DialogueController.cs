@@ -52,6 +52,13 @@ public class DialogueController : MonoBehaviour
     {
         playerController = GameManager.Instance.GetPlayer();
         waitForSeconds = new WaitForSeconds(typingSpeed);
+        locale = PrefManager.GetLanguage();
+    }
+
+    public void ChangeLocale(Locales newLocale)
+    {
+        locale = newLocale;
+        PrefManager.SetLanguage(locale);
     }
 
     IEnumerator TypeSentence()

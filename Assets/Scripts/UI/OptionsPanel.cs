@@ -11,11 +11,6 @@ public class OptionsPanel : MonoBehaviour
 
     public Text languageText;
 
-    /*public Button ptBR;
-
-    public Button enUS;
-
-    public Button esES;*/
     public List<string> on = new List<string>();
     public List<string> off = new List<string>();
 
@@ -39,32 +34,14 @@ public class OptionsPanel : MonoBehaviour
 
         switch (DialogueController.Instance.locale)
         {
-            /*case Locales.pt_BR:
-                languageText.text = "Escolha o idioma";
-                ptBR.interactable = true;
-                backgrounds[0].gameObject.SetActive(true);
-                break;
-            case Locales.en_US:
-                languageText.text = "Choose language";
-                enUS.interactable = true;
-                backgrounds[1].gameObject.SetActive(true);
-                break;
-            case Locales.es_ES:
-                languageText.text = "Seleccione el idioma";
-                esES.interactable = true;
-                backgrounds[2].gameObject.SetActive(true);
-                break;*/
             case Locales.pt_BR:
                 index = 0;
-                //ptBR.interactable = false;
                 break;
             case Locales.en_US:
                 index = 1;
-                //enUS.interactable = false;
                 break;
             case Locales.es_ES:
                 index = 2;
-                //esES.interactable = true;
                 break;
         }
 
@@ -90,14 +67,10 @@ public class OptionsPanel : MonoBehaviour
         {
             image.gameObject.SetActive(false);
         }
-        
     }
 
     private void ShowAllButtons()
     {
-        /*ptBR.interactable = true;
-        enUS.interactable = true;
-        esES.interactable = true;*/
         foreach (Button button in buttons)
         {
             button.interactable = true;
@@ -106,19 +79,19 @@ public class OptionsPanel : MonoBehaviour
 
     public void SelectBR()
     {
-        DialogueController.Instance.locale = Locales.pt_BR;
+        DialogueController.Instance.ChangeLocale(Locales.pt_BR);
         ShowUI();
     }
 
     public void SelectUS()
     {
-        DialogueController.Instance.locale = Locales.en_US;
+        DialogueController.Instance.ChangeLocale(Locales.en_US);
         ShowUI();
     }
 
     public void SelectES()
     {
-        DialogueController.Instance.locale = Locales.es_ES;
+        DialogueController.Instance.ChangeLocale(Locales.es_ES);
         ShowUI();
     }
 
@@ -133,5 +106,4 @@ public class OptionsPanel : MonoBehaviour
         AudioManager.Instance.SoundOff();
         ShowUI();
     }
-
 }
