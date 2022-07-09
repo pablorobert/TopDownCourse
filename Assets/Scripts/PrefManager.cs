@@ -10,8 +10,7 @@ public class PrefManager : MonoBehaviour
     public static bool GetSound()
     {
         if (PlayerPrefs.HasKey(PLAYER_PREF_SOUND)) {
-            int bgmsound = PlayerPrefs.GetInt(PLAYER_PREF_SOUND);
-            return bgmsound == 1;
+            return PlayerPrefs.GetInt(PLAYER_PREF_SOUND) == 1;
         } else
         {
             return true;
@@ -20,19 +19,14 @@ public class PrefManager : MonoBehaviour
 
     public static void SetSound(bool bgmsound)
     {
-        int sound = 0;
-        if (bgmsound)
-        {
-            sound = 1;
-        }
-        PlayerPrefs.SetInt(PLAYER_PREF_SOUND, sound);
+        PlayerPrefs.SetInt(PLAYER_PREF_SOUND, bgmsound ? 1: 0);
     }
 
     public static Locales GetLanguage()
     {
         if (PlayerPrefs.HasKey(PLAYER_PREF_LANGUAGE))
         {
-            return (Locales)PlayerPrefs.GetInt(PLAYER_PREF_LANGUAGE);
+            return (Locales) PlayerPrefs.GetInt(PLAYER_PREF_LANGUAGE);
         } else
         {
             return Locales.pt_BR; //default
