@@ -4,7 +4,6 @@ using UnityEditor;
 [CustomEditor(typeof(Recipe))]
 public class RecipeEditor : Editor
 {
-
     public const int SIZE = 64;
 
     public override void OnInspectorGUI()

@@ -18,7 +18,7 @@ TagManager:
   - Player
   - Enemy
   - Boundary
-  - 
+  - Canvas
   - 
   - 
   - 
@@ -44,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Agent
+    uniqueID: 4149176179
+    locked: 0
+  - name: UI
+    uniqueID: 2364301619
     locked: 0

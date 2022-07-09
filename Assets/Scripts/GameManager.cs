@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public QuestManager questManager;
 
+    public GameObject chooseLanguagePanel;
+
     public QuestManager QuestManager
     {
         get { return questManager; }
@@ -38,6 +40,12 @@ public class GameManager : MonoBehaviour
             player = FindObjectOfType<PlayerController>();
         }
         return player;
+    }
+
+    public void ShowLanguagePanel()
+    {
+        chooseLanguagePanel.SetActive(!chooseLanguagePanel.activeSelf);
+        chooseLanguagePanel.GetComponentInChildren<OptionsPanel>().ShowUI();
     }
 
 

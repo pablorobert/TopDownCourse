@@ -7,6 +7,11 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     private AudioSource audioSource;
+
+    public bool bgmOn = true;
+
+    public float defaultVolume;
+
     void Awake()
     {
         if (Instance == null)
@@ -23,11 +28,24 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        defaultVolume = audioSource.volume;
     }
 
     public void Play(AudioClip audioClip)
     {
         audioSource.clip = audioClip;
         audioSource.Play();
+    }
+
+    public void SoundOff()
+    {
+        bgmOn = false;
+        audioSource.volume = 0;
+    }
+
+    public void SoundOn()
+    {
+        bgmOn = true;
+        audioSource.volume = defaultVolume;
     }
 }
