@@ -10,6 +10,8 @@ public enum ItemType
     Fish,
     Sword,
 }
+
+
 [CreateAssetMenu(menuName = "Items/New Item", fileName = "New Item")]
 public class Item : ScriptableObject
 {

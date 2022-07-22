@@ -15,160 +15,239 @@ public class RecipeEditor : Editor
         GUIStyle textStyle = new GUIStyle { fontStyle = FontStyle.Bold };
         textStyle.normal.textColor = Color.white;
 
-        EditorGUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label("outcome", textStyle);
-        GUILayout.FlexibleSpace();
-        EditorGUILayout.EndHorizontal();
+        //SerializedObject sObj = new SerializedObject(target);
 
-        EditorGUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-
-        EditorGUILayout.BeginVertical();
-
-        //Texture texture = null;
-        Sprite sprite = null;
-        if (recipeScriptableObject.outcome != null)
+        using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
         {
-            sprite = recipeScriptableObject.outcome.sprite;
+            GUILayout.FlexibleSpace();
+            GUILayout.Label("outcome", textStyle);
+            GUILayout.FlexibleSpace();
         }
+        
+        Sprite sprite = null;
+        using (new GUILayout.HorizontalScope())
+        {
+            GUILayout.FlexibleSpace();
 
-        EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(64), GUILayout.Height(64));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("outcome"), GUIContent.none, true, GUILayout.Width(SIZE));
+            EditorGUILayout.BeginVertical();
+            
+            if (recipeScriptableObject.outcome != null)
+            {
+                sprite = recipeScriptableObject.outcome.sprite;
+            }
 
-        EditorGUILayout.EndVertical();
+            EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(64), GUILayout.Height(64));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("outcome"), GUIContent.none, true, GUILayout.Width(SIZE));
 
-        GUILayout.FlexibleSpace();
-        EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndVertical();
+
+            GUILayout.FlexibleSpace();
+        }
 
         EditorGUILayout.Space();
 
-
         GUILayout.Label("Recipe", textStyle);
 
+        // start of items
+
+        SerializedProperty propItems = serializedObject.FindProperty("items");
+
         EditorGUILayout.BeginHorizontal();
+        for (int i = 0; i < 3; i++)
+        {
+            SerializedProperty propItem = propItems.GetArrayElementAtIndex(i); //item of array
+
+            using (new GUILayout.HorizontalScope())
+            {
+                {
+                    EditorGUILayout.BeginVertical();
+                    sprite = null;
+
+                    Item itObj = null;
+                    if (propItem != null)
+                    {
+                        itObj = propItem.objectReferenceValue as Item;
+                    }
+
+                    EditorGUILayout.ObjectField(itObj?.sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
+                    EditorGUILayout.PropertyField(propItem, GUIContent.none, true, GUILayout.Width(SIZE));
+                    EditorGUILayout.EndVertical();
+                }
+            }
+        }
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        for (int i = 3; i < 6; i++)
+        {
+            SerializedProperty propItem = propItems.GetArrayElementAtIndex(i); //item of array
+
+            using (new GUILayout.HorizontalScope())
+            {
+                {
+                    EditorGUILayout.BeginVertical();
+                    sprite = null;
+
+                    Item itObj = null;
+                    if (propItem != null)
+                    {
+                        itObj = propItem.objectReferenceValue as Item;
+                    }
+
+                    EditorGUILayout.ObjectField(itObj?.sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
+                    EditorGUILayout.PropertyField(propItem, GUIContent.none, true, GUILayout.Width(SIZE));
+                    EditorGUILayout.EndVertical();
+                }
+            }
+        }
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        for (int i = 6; i < 9; i++)
+        {
+            SerializedProperty propItem = propItems.GetArrayElementAtIndex(i); //item of array
+
+            using (new GUILayout.HorizontalScope())
+            {
+                {
+                    EditorGUILayout.BeginVertical();
+                    sprite = null;
+
+                    Item itObj = null;
+                    if (propItem != null)
+                    {
+                        itObj = propItem.objectReferenceValue as Item;
+                    }
+
+                    EditorGUILayout.ObjectField(itObj?.sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
+                    EditorGUILayout.PropertyField(propItem, GUIContent.none, true, GUILayout.Width(SIZE));
+                    EditorGUILayout.EndVertical();
+                }
+            }
+        }
+        EditorGUILayout.EndHorizontal();
+
+        /*using (new GUILayout.HorizontalScope())
+        {
+            {
+                EditorGUILayout.BeginVertical();
+                sprite = null;
+
+                if (recipeScriptableObject.item_02 != null)
+                {
+                    sprite = recipeScriptableObject.item_02.sprite;
+                }
+
+                EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
+
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("item_02"), GUIContent.none, true, GUILayout.Width(SIZE));
+                EditorGUILayout.EndVertical();
+            }
+
+            {
+                EditorGUILayout.BeginVertical();
+
+                sprite = null;
+                if (recipeScriptableObject.item_12 != null)
+                {
+                    sprite = recipeScriptableObject.item_12.sprite;
+                }
+                EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("item_12"), GUIContent.none, true, GUILayout.Width(SIZE));
+
+                EditorGUILayout.EndVertical();
+            }
+
+            {
+                EditorGUILayout.BeginVertical();
+
+                sprite = null; ;
+                if (recipeScriptableObject.item_22 != null)
+                {
+                    sprite = recipeScriptableObject.item_22.sprite;
+                }
+                EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("item_22"), GUIContent.none, true, GUILayout.Width(SIZE));
+                EditorGUILayout.EndVertical();
+            }
+
+        }*/
+
+        /*using (new GUILayout.HorizontalScope())
         {
             EditorGUILayout.BeginVertical();
             sprite = null;
 
-            if (recipeScriptableObject.item_02 != null)
+            if (recipeScriptableObject.item_01 != null)
             {
-                sprite = recipeScriptableObject.item_02.sprite;
+
+                sprite = recipeScriptableObject.item_01.sprite;
             }
-
             EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
-
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("item_02"), GUIContent.none, true, GUILayout.Width(SIZE));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("item_01"), GUIContent.none, true, GUILayout.Width(SIZE));
             EditorGUILayout.EndVertical();
-        }
 
+            EditorGUILayout.BeginVertical();
+            sprite = null;
+
+            if (recipeScriptableObject.item_11 != null)
+            {
+                sprite = recipeScriptableObject.item_11.sprite;
+            }
+            EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("item_11"), GUIContent.none, true, GUILayout.Width(SIZE));
+            EditorGUILayout.EndVertical();
+
+            EditorGUILayout.BeginVertical();
+            sprite = null;
+            if (recipeScriptableObject.item_21 != null)
+            {
+                sprite = recipeScriptableObject.item_21.sprite;
+            }
+            EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("item_21"), GUIContent.none, true, GUILayout.Width(SIZE));
+            EditorGUILayout.EndVertical();
+
+        }*/
+
+        /*using (new GUILayout.HorizontalScope())
         {
+
+            EditorGUILayout.BeginVertical();
+            sprite = null;
+            if (recipeScriptableObject.item_00 != null)
+            {
+                sprite = recipeScriptableObject.item_00.sprite;
+            }
+            EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("item_00"), GUIContent.none, true, GUILayout.Width(SIZE));
+            EditorGUILayout.EndVertical();
+
             EditorGUILayout.BeginVertical();
 
             sprite = null;
-            if (recipeScriptableObject.item_12 != null)
+            if (recipeScriptableObject.item_10 != null)
             {
-                sprite = recipeScriptableObject.item_12.sprite;
+                sprite = recipeScriptableObject.item_10.sprite;
             }
             EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("item_12"), GUIContent.none, true, GUILayout.Width(SIZE));
-
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("item_10"), GUIContent.none, true, GUILayout.Width(SIZE));
             EditorGUILayout.EndVertical();
-        }
 
-        {
             EditorGUILayout.BeginVertical();
-
-            sprite = null; ;
-            if (recipeScriptableObject.item_22 != null)
+            sprite = null;
+            if (recipeScriptableObject.item_20 != null)
             {
-                sprite = recipeScriptableObject.item_22.sprite;
+                sprite = recipeScriptableObject.item_20.sprite;
             }
             EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("item_22"), GUIContent.none, true, GUILayout.Width(SIZE));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("item_20"), GUIContent.none, true, GUILayout.Width(SIZE));
             EditorGUILayout.EndVertical();
-        }
 
-        EditorGUILayout.EndHorizontal();
-
-        EditorGUILayout.BeginHorizontal();
-
-        EditorGUILayout.BeginVertical();
-        sprite = null;
-
-        if (recipeScriptableObject.item_01 != null)
-        {
-
-            sprite = recipeScriptableObject.item_01.sprite;
-        }
-        EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("item_01"), GUIContent.none, true, GUILayout.Width(SIZE));
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.BeginVertical();
-        sprite = null;
-
-        if (recipeScriptableObject.item_11 != null)
-        {
-            sprite = recipeScriptableObject.item_11.sprite;
-        }
-        EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("item_11"), GUIContent.none, true, GUILayout.Width(SIZE));
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.BeginVertical();
-        sprite = null;
-        if (recipeScriptableObject.item_21 != null)
-        {
-            sprite = recipeScriptableObject.item_21.sprite;
-        }
-        EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("item_21"), GUIContent.none, true, GUILayout.Width(SIZE));
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.EndHorizontal();
-
-
-
-
-        EditorGUILayout.BeginHorizontal();
-
-        EditorGUILayout.BeginVertical();
-        sprite = null;
-        if (recipeScriptableObject.item_00 != null)
-        {
-            sprite = recipeScriptableObject.item_00.sprite;
-        }
-        EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("item_00"), GUIContent.none, true, GUILayout.Width(SIZE));
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.BeginVertical();
-
-        sprite = null;
-        if (recipeScriptableObject.item_10 != null)
-        {
-            sprite = recipeScriptableObject.item_10.sprite;
-        }
-        EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("item_10"), GUIContent.none, true, GUILayout.Width(SIZE));
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.BeginVertical();
-        sprite = null;
-        if (recipeScriptableObject.item_20 != null)
-        {
-            sprite = recipeScriptableObject.item_20.sprite;
-        }
-        EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(SIZE), GUILayout.Height(SIZE));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("item_20"), GUIContent.none, true, GUILayout.Width(SIZE));
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.EndHorizontal();
-
+        }*/
         serializedObject.ApplyModifiedProperties();
     }
-
+    
     /*private void DrawOnGUISprite(Sprite aSprite)
     {
         Rect c = aSprite.rect;

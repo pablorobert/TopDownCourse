@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Test_Recipe
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: e4fe7e4f95f9cee4e95c6210e3fcb469, type: 2}
+  - {fileID: 11400000, guid: dd7db2bddbb5a404e92d80aaf28c61dc, type: 2}
+  - {fileID: 11400000, guid: e9a3bcacdcc58eb4b8bd211acb130fb0, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -32,3 +32,48 @@ MonoBehaviour:
   item_21: {fileID: 0}
   item_22: {fileID: 0}
   outcome: {fileID: 11400000, guid: 619b7f3baa08d464096c32abf581bd1d, type: 2}
+--- !u!114 &33908135799879190
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d3246920e07c644b503b77149f43ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  sprite: {fileID: 0}
+  itemName: 
+--- !u!114 &1904417758881630423
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d3246920e07c644b503b77149f43ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  sprite: {fileID: 0}
+  itemName: 
+--- !u!114 &7938799210724159523
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d3246920e07c644b503b77149f43ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  sprite: {fileID: 0}
+  itemName: 

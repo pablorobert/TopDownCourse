@@ -17,25 +17,17 @@ public class Recipe : ScriptableObject
     public Item item_21;
     public Item item_22;
 
-    public Item getItem(int x, int y)
+    public Item GetItem(int x, int y)
     {
-        //return items[x * 3 + y];
-        if (x == 0 && y == 0) return item_00;
-        if (x == 0 && y == 1) return item_01;
-        if (x == 0 && y == 2) return item_02;
-
-        if (x == 1 && y == 0) return item_10;
-        if (x == 1 && y == 1) return item_11;
-        if (x == 1 && y == 2) return item_12;
-
-        if (x == 2 && y == 0) return item_20;
-        if (x == 2 && y == 1) return item_21;
-        if (x == 2 && y == 2) return item_22;
-
-        return null;
+        return items[y * 3 + x];
     }
 
-    public Item GetItem(int x)
+    public Item GetItem(int pos)
+    {
+        return items[pos];
+    }
+
+    public Item getItem(int x)
     {
         //return items[x * 3 + y];
         /*if (x == 0) return item_00;
@@ -50,7 +42,7 @@ public class Recipe : ScriptableObject
         if (x == 7) return item_21;
         if (x == 8) return item_22;*/
 
-        if (x == 0) return item_02;
+        /*if (x == 0) return item_02;
         if (x == 1) return item_12;
         if (x == 2) return item_22;
 
@@ -60,24 +52,23 @@ public class Recipe : ScriptableObject
 
         if (x == 6) return item_00;
         if (x == 7) return item_10;
-        if (x == 8) return item_20;
+        if (x == 8) return item_20;*/
 
         return null;
     }
 
     public bool Check(List<Item> items)
     {
-        int index = -1;
-
+        int index = 0;
         foreach (Item item in items)
         {
-            index++;
             if (item != GetItem(index))
             {
                 return false;
             }
+            index++;
         }
-        Debug.Log("Success");
+        //Debug.Log("Success");
         return true;
     }
 

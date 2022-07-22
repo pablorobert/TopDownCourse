@@ -33358,7 +33358,7 @@ MonoBehaviour:
   - {fileID: 1619682818}
   - {fileID: 923635779}
   recipes:
-  - {fileID: 11400000, guid: 6b41d3c8c11578d468564d1f78ab626c, type: 2}
+  - {fileID: 11400000, guid: 6e804323a4ebbb047b1a97569eb49df2, type: 2}
   - {fileID: 11400000, guid: 9643d5855ec78964984bc08e01a52612, type: 2}
   recipeItems: []
 --- !u!1 &312637217
