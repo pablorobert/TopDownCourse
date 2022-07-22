@@ -7,7 +7,7 @@ public class Recipe : ScriptableObject
 {
     public Item[] items = new Item[9];
 
-    public Item item_00;
+    /*public Item item_00;
     public Item item_01;
     public Item item_02;
     public Item item_10;
@@ -15,7 +15,7 @@ public class Recipe : ScriptableObject
     public Item item_12;
     public Item item_20;
     public Item item_21;
-    public Item item_22;
+    public Item item_22;*/
 
     public Item GetItem(int x, int y)
     {
