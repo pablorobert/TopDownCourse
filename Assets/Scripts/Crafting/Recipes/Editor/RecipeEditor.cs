@@ -5,6 +5,8 @@ using UnityEditor;
 public class RecipeEditor : Editor
 {
     public const int SIZE = 64;
+    public const int ELEMENTS = 9;
+    public const int COLUMNS = 3;
 
     public override void OnInspectorGUI()
     {
@@ -50,17 +52,19 @@ public class RecipeEditor : Editor
         // start of recipe items
         SerializedProperty propItems = serializedObject.FindProperty("items");
 
-        for (int i = 0; i < 9; i++)
+        int currentRow = 0;
+        for (int i = 0; i < ELEMENTS; i++)
         {
             SerializedProperty propItem = propItems.GetArrayElementAtIndex(i); //item of array
 
             using (new GUILayout.HorizontalScope())
             {
-                if ( i  == 0 || i == 3 || i == 6)
+                if (i % COLUMNS == 0)
                 {
+                    currentRow++;
                     EditorGUILayout.BeginHorizontal();
                 }
-
+                
                 //stack the two elements vertically
                 EditorGUILayout.BeginVertical();
                 sprite = null;
@@ -75,8 +79,8 @@ public class RecipeEditor : Editor
                 EditorGUILayout.PropertyField(propItem, GUIContent.none, true, GUILayout.Width(SIZE));
 
                 EditorGUILayout.EndVertical();
-
-                if (i == 2 || i == 5 || i == 8)
+                
+                if (i == ((COLUMNS * currentRow - 1)))
                 {
                     EditorGUILayout.EndHorizontal();
                 }
