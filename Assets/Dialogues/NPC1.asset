@@ -16,31 +16,36 @@ MonoBehaviour:
   profileImage: {fileID: 0}
   sentence: 
   sentences:
-  - actorName: Candace
+  - turn: 1
+    actorName: 
     actorImage: {fileID: 0}
     sentence:
       portuguese: "Ol\xE1"
       english: Hello
       spanish: Hola
-  - actorName: Hero
+  - turn: 0
+    actorName: 
     actorImage: {fileID: 0}
     sentence:
       portuguese: "O que eu fa\xE7o?"
       english: What do I do?
       spanish: "\xBFQu\xE9 hago?"
-  - actorName: 
+  - turn: 0
+    actorName: 
     actorImage: {fileID: 0}
     sentence:
       portuguese: "Acabei de chegar. N\xE3o sei o que fazer"
       english: I just arrived. Don't know what to do
       spanish: Acabo de llegar. No se o que hacer
-  - actorName: Candace
+  - turn: 1
+    actorName: Candace
     actorImage: {fileID: 0}
     sentence:
       portuguese: "Voc\xEA precisa ler a placa na est\xE1tua"
       english: You need to read the sign at the statue
       spanish: Necesitas leer la placa en la estatua
-  - actorName: 
+  - turn: 1
+    actorName: 
     actorImage: {fileID: 0}
     sentence:
       portuguese: "J\xE1 tentou fazer isso?"

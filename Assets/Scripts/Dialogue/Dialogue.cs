@@ -54,6 +54,7 @@ public class Dialogue : MonoBehaviour
 
         if (isPlayerDetected && player.IsSpeaking)
         {
+            DialogueController.Instance.SetNpc(npc);
             DialogueController.Instance.Speak(dialogue);
         }
     }

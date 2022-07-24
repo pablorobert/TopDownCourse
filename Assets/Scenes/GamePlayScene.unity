@@ -160,6 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b359aa348774e2c44ba5afdcbb2488c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: PABLO
+  avatar: {fileID: -1536016378, guid: 5bc591e0ad81ef944b0fae3fb7c2b490, type: 3}
   criticalDamageHealth: 3
   <MaxHealth>k__BackingField: 15
   <CurrentHealth>k__BackingField: 0
@@ -1290,6 +1292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e956a93dcd6c52419d1a966986adece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcName: Steve
+  avatar: {fileID: -3731708922423295041, guid: 04bdf25eff6dbeb4ca3e2c92eb992400, type: 3}
   randomHair: 0
   hairType: 2
   npcAnimators:
@@ -1823,6 +1827,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e956a93dcd6c52419d1a966986adece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcName: 
+  avatar: {fileID: 0}
   randomHair: 0
   hairType: 0
   npcAnimators:
@@ -42441,6 +42447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e956a93dcd6c52419d1a966986adece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcName: 
+  avatar: {fileID: 0}
   randomHair: 0
   hairType: 0
   npcAnimators:
@@ -43415,6 +43423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e956a93dcd6c52419d1a966986adece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcName: Ben
+  avatar: {fileID: -4659787070400776628, guid: 04bdf25eff6dbeb4ca3e2c92eb992400, type: 3}
   randomHair: 0
   hairType: 0
   npcAnimators:
@@ -48186,7 +48196,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -52767,6 +52777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e956a93dcd6c52419d1a966986adece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcName: Alice
+  avatar: {fileID: 21300000, guid: f3a3013ce1dec1b4cae192bdd99e7c6e, type: 3}
   randomHair: 0
   hairType: 1
   npcAnimators:
@@ -52890,6 +52902,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e956a93dcd6c52419d1a966986adece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcName: 
+  avatar: {fileID: 0}
   randomHair: 0
   hairType: 0
   npcAnimators:

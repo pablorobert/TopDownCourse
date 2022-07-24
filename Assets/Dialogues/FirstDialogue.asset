@@ -16,19 +16,22 @@ MonoBehaviour:
   profileImage: {fileID: 0}
   sentence: 
   sentences:
-  - actorName: Sign
+  - turn: 0
+    actorName: Sign
     actorImage: {fileID: 0}
     sentence:
       portuguese: "Seja o her\xF3i que a cidade precisa"
       english: 
       spanish: 
-  - actorName: 
+  - turn: 1
+    actorName: 
     actorImage: {fileID: 0}
     sentence:
       portuguese: "Todos est\xE3o contando com voc\xEA"
       english: 
       spanish: 
-  - actorName: 
+  - turn: 1
+    actorName: 
     actorImage: {fileID: 0}
     sentence:
       portuguese: "Esse aviso s\xF3 ser\xE1 lido uma vez. Boa sorte!"

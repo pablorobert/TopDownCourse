@@ -15,9 +15,11 @@ public enum PlayerTools
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player Info")]
+    public string playerName;
+    public Sprite avatar;
 
     [Header("Health")]
-
     [Tooltip("The amount of health to enable critical damage")]
     public int criticalDamageHealth = 3;
 
@@ -113,6 +115,16 @@ public class PlayerController : MonoBehaviour
     public Vector2 Direction
     {
         get { return direction; }
+    }
+
+    public string Name
+    {
+        get { return playerName; }
+    }
+
+    public Sprite Avatar
+    {
+        get { return avatar; }
     }
 
     void Start()

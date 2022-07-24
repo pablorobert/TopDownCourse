@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using System;
 
 public enum Locales
 {
@@ -30,6 +31,12 @@ public class DialogueController : MonoBehaviour
 
     public Locales locale;
 
+    private string npcName;
+    private Sprite npcAvatar;
+
+    private string actorName;
+    private Sprite actorImage;
+
     //control 
     public bool IsVisible
     {
@@ -53,6 +60,12 @@ public class DialogueController : MonoBehaviour
         playerController = GameManager.Instance.GetPlayer();
         waitForSeconds = new WaitForSeconds(typingSpeed);
         locale = PrefManager.GetLanguage();
+    }
+
+    public void SetNpc(NPC npc)
+    {
+       npcAvatar = npc.Avatar;
+       npcName = npc.Name;
     }
 
     public void ChangeLocale(Locales newLocale)
@@ -82,8 +95,6 @@ public class DialogueController : MonoBehaviour
 
     public void NextSentence()
     {
-        string actorName;
-        Sprite actorImage;
         int lastIndex = currentIndex;
         currentIndex++;
         if (currentIndex == dialogueSettings.sentences.Count) //out of sentences
@@ -102,8 +113,7 @@ public class DialogueController : MonoBehaviour
         GetSentence(lastIndex) == speechText.text)
         {
             speechText.text = "";
-            actorName = dialogueSettings.sentences[currentIndex].actorName;
-            actorImage = dialogueSettings.sentences[currentIndex].actorImage;
+            ConfigureNameAndSprite();
 
             if (actorName != null && actorName != "")
             {
@@ -114,6 +124,20 @@ public class DialogueController : MonoBehaviour
                 profileImage.sprite = actorImage;
             }
             StartCoroutine(TypeSentence());
+        }
+    }
+
+    private void ConfigureNameAndSprite()
+    {
+        if (dialogueSettings.sentences[currentIndex].turn == DialogueTurn.PLAYER)
+        {
+            actorName = GameManager.Instance.GetPlayer().Name;
+            actorImage = GameManager.Instance.GetPlayer().Avatar;
+        }
+        else
+        {
+            actorName = npcName;
+            actorImage = npcAvatar;
         }
     }
 
@@ -133,6 +157,7 @@ public class DialogueController : MonoBehaviour
 
     public void Speak(DialogueSettings settings)
     {
+
         if (!IsVisible)
         {
             IsVisible = true;
@@ -144,8 +169,7 @@ public class DialogueController : MonoBehaviour
             currentIndex = 0;
 
             speechText.text = "";
-            string actorName = dialogueSettings.sentences[currentIndex].actorName;
-            Sprite actorImage = dialogueSettings.sentences[currentIndex].actorImage;
+            ConfigureNameAndSprite();
 
             if (actorName != null)
             {

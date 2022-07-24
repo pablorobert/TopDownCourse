@@ -15,6 +15,20 @@ public enum NPCType
 //TO-DO split appearance and movement
 public class NPC : MonoBehaviour
 {
+    [Header("NPC Info")]
+    public string npcName;
+    public Sprite avatar;
+
+    public string Name
+    {
+        get { return npcName; }
+    }
+
+    public Sprite Avatar
+    {
+        get { return avatar; }
+    }
+
     [Header("Hair")]
     public bool randomHair;
     public NPCType hairType;
